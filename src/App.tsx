@@ -1,11 +1,10 @@
-
-function App() {
-
+import Banner from "./pages/home/Banner";
+const App = () => {
   return (
     <>
-      <p>Book Shop</p>
+    <Banner/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

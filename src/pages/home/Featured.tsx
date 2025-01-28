@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ProductCard } from "@/components/shared/ProductCard";
+import SectionTitle from "@/components/shared/SectionTitle";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetProductsQuery } from "@/redux/features/products/productApi";
 import Carousel from "react-multi-carousel";
@@ -14,14 +15,9 @@ const Featured = () => {
   } = useGetProductsQuery(undefined);
 
   return (
-    <div className="w-full pt-12">
-      <div className="text-center">
-        <h1 className="text xl lg:text-3xl font-bold jost-semibold">
-          Featured Product
-        </h1>
-        <p>Check out our featured products</p>
-      </div>
-      <div className="max-w-7xl mx-auto py-12 flex flex-col justify-center items-center">
+    <div className="w-full pt-28">
+      <SectionTitle title="Featured Product" description="Check out our featured products" />
+      <div className="max-w-7xl mx-auto pt-12 flex flex-col justify-center items-center">
         {isFetching ? (
           <div className="w-full h-full flex justify-center items-center gap-2">
             {[1,2,3,4,5].map((_, index) => (

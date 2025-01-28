@@ -16,9 +16,9 @@ const Footer = () => {
         <nav className="flex flex-col">
           <h6 className="footer-title">Services</h6>
           <Link to="/" className="link link-hover">Home</Link>
-          <Link to="/" className="link link-hover">About us</Link>
-          <Link to="/" className="link link-hover">Contact</Link>
-          <Link to="/" className="link link-hover">All Products</Link>
+          <Link to="/about" className="link link-hover">About us</Link>
+          <Link to="/contact" className="link link-hover">Contact</Link>
+          <Link to="/all-products" className="link link-hover">All Products</Link>
         </nav>
         <nav className="flex flex-col">
           <h6 className="footer-title">Contact</h6>

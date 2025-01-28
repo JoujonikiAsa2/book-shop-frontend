@@ -1,5 +1,6 @@
 import SectionTitle from "@/components/shared/SectionTitle";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+// import { Skeleton } from "@/components/ui/skeleton";
 import { RiDoubleQuotesL } from "react-icons/ri";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -53,11 +54,18 @@ const Testimonial = () => {
           }}
         >
           {[1, 2, 3, 4, 5].map((_, index) => (
-            <Card className="h-[370px] md:w-[300px] mx-[5px] rounded-none" key={index}>
+            <Card
+              className="h-[370px] md:w-[300px] mx-[5px] rounded-none"
+              key={index}
+            >
               <CardTitle className="p-6 flex justify-between">
                 <RiDoubleQuotesL className="text-2xl font-bold text-primary" />
                 <div className="">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo_R_vlnUz9UhylMPCccagw4dMqhbs4UMPAA&s" alt="" className="size-20 rounded-full"/>
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo_R_vlnUz9UhylMPCccagw4dMqhbs4UMPAA&s"
+                    alt=""
+                    className="size-20 rounded-full"
+                  />
                 </div>
               </CardTitle>
               <CardHeader className="p-6">
@@ -78,6 +86,30 @@ const Testimonial = () => {
           ))}
         </Carousel>
       </div>
+      {/* <div className="flex flex-col space-y-4">
+        <Skeleton className="h-[370px] md:w-[300px] mx-[5px] rounded-none">
+          <div className="flex flex-col space-y-4 h-full">
+            <div className="p-6 flex justify-between items-center">
+              <Skeleton className="h-6 w-10" /> 
+              <Skeleton className="h-20 w-20 rounded-full" />{" "}
+            </div>
+            <div className="p-6 space-y-2">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-[100%]" />
+              <Skeleton className="h-4 w-[90%]" />
+              <Skeleton className="h-4 w-[80%]" />
+              <Skeleton className="h-4 w-[80%]" />
+            </div>
+            <div className="p-0 flex justify-end items-end relative h-full">
+              <div>
+                <Skeleton className="w-[10%] h-12  rounded-ss-full rounded-ee-full absolute right-2 top-1"/>
+                <Skeleton className="w-[10%] h-12 rounded-ss-full rounded-ee-full  absolute right-8 top-0 bottom-0 -rotate-45"/>
+                <Skeleton className="w-[10%] h-12  rounded-ss-full rounded-ee-full absolute right-12 top-3 -rotate-90"/>
+              </div>
+            </div>
+          </div>
+        </Skeleton>
+      </div> */}
     </div>
   );
 };

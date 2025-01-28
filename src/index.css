@@ -60,6 +60,23 @@
   font-style: normal;
 }
 
+.footer-title{
+  font-family: "Jost", serif;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.link{
+  font-family: "Jost", serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.link-hover:hover{
+  text-decoration: underline;
+}
 
 @layer base {
   :root {

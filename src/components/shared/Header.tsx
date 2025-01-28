@@ -21,7 +21,7 @@ const items = [
 
 const Header = () => {
     return (
-        <div className="border py-2 hidden sm:hidden md:hidden lg:block">
+        <div className="border py-2 hidden sm:hidden md:hidden lg:block bg-black text-white">
             <div className="flex justify-between items-center mx-[5%]">
                 <div>Contact: +1 234 567 890</div>
                 <div className="flex justify-between items-center gap-4">

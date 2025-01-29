@@ -1,21 +1,19 @@
-import SectionTitle from "@/components/shared/SectionTitle";
-import image from "../../assets/banner.jpg";
+import image from "../../assets/about.jpg";
 import goal from "../../assets/goal.jpg";
 import question from "../../assets/question.jpg";
 import SubTitle from "@/components/shared/SubTitle";
+import CustomBanner from "@/components/shared/CustomBanner";
 const About = () => {
   return (
     <div>
       <div className=" w-full ">
         <div className="pb-12 relative">
-          <img src={image} alt="" className="h-[500px] w-full object-cover" />
-          <div className="absolute h-[180px] bg-white p-10 md:rounded-lg opacity-70 top-36 inset-2 md:inset-[10rem] lg:inset-36">
-            <SectionTitle
-              title="About"
+            <CustomBanner
+            image={image}
+              sectionTitle="About"
               description=" Welcome to InkSpire, where stories come alive and knowledge knows no
             bounds"
             />
-          </div>
         </div>
         <div className="p-6 right-0 bottom-0 pt-12 flex justify-center ">
           <section className="py-8 px-4 w-full max-w-7xl flex flex-col gap-10 relative">

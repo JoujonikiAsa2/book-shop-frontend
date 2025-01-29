@@ -1,4 +1,3 @@
-import SectionTitle from "@/components/shared/SectionTitle";
 import image from "../../assets/contact.jpg";
 // import BSForm from "@/components/form/Form";
 import { FieldValues, useForm } from "react-hook-form";
@@ -10,6 +9,7 @@ import { sendEmail } from "@/utils/sendEmail";
 import BSTextarea from "@/components/form/Textarea";
 import { toast } from "sonner";
 import { Send } from "lucide-react";
+import CustomBanner from "@/components/shared/CustomBanner";
 const Contact = () => {
   const form = useForm();
   const { resetField } = form;
@@ -27,13 +27,7 @@ const Contact = () => {
   return (
     <div className="w-full">
       <div className="pb-12 relative">
-        <img src={image} alt="" className="h-[500px] w-full object-cover" />
-        <div className="absolute h-[180px] bg-white p-10 md:rounded-lg opacity-70 top-36 inset-2 md:inset-[10rem] lg:inset-36 ">
-          <SectionTitle
-            title="Contact"
-            description="Feel free to reach us for any queries"
-          />
-        </div>
+        <CustomBanner image={image} sectionTitle="Contact" description="Feel free to reach us for any queries" />
       </div>
       <div className="w-full">
         <div className="max-w-2xl mx-auto py-12 bg-white border m-12 p-12 shadow-2xl">

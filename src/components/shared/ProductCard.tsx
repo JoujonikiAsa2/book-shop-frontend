@@ -11,9 +11,9 @@ import {
 
 export function ProductCard({product}:any) {
   return (
-    <Card className="h-[340px] w-[98%] rounded-none">
+    <Card className="h-[400px] w-[98%] rounded-none">
       <CardHeader>
-        <CardTitle className="flex justify-center"><img src={product.imgUrl} alt="" className="size-32"/></CardTitle>
+        <CardTitle className="flex justify-center"><img src={product.imgUrl} alt="" className="w-full h-48 object-cover"/></CardTitle>
         <CardDescription>{product.name}</CardDescription>
       </CardHeader>
       <CardContent className="text-sm">

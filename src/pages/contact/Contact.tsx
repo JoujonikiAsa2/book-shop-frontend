@@ -9,6 +9,7 @@ import BSForm from "@/components/form/Form";
 import { sendEmail } from "@/utils/sendEmail";
 import BSTextarea from "@/components/form/Textarea";
 import { toast } from "sonner";
+import { Send } from "lucide-react";
 const Contact = () => {
   const form = useForm();
   const { resetField } = form;
@@ -69,7 +70,7 @@ const Contact = () => {
               required={true}
             />
             <Button type="submit" className="w-full">
-              Submit
+              Submit <Send></Send>
             </Button>
           </BSForm>
         </div>

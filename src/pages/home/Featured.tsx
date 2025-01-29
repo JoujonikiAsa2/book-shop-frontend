@@ -2,10 +2,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ProductCard } from "@/components/shared/ProductCard";
 import SectionTitle from "@/components/shared/SectionTitle";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetProductsQuery } from "@/redux/features/products/productApi";
+import { GoArrowUpRight } from "react-icons/go";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 const Featured = () => {
   const {
@@ -83,6 +86,9 @@ const Featured = () => {
             )}
           </Carousel>
         )}
+      </div>
+      <div className="py-4 flex justify-center">
+        <Link to="all-products"><Button>See More <GoArrowUpRight size={20}/></Button></Link>
       </div>
     </div>
   );

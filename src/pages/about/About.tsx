@@ -8,8 +8,8 @@ const About = () => {
     <div>
       <div className=" w-full ">
         <div className="pb-12 relative">
-          <img src={image} alt="" className="h-[700px] w-full object-cover" />
-          <div className="absolute h-[180px] bg-white p-10 md:rounded-lg opacity-70 top-64 inset-2 md:inset-[16rem] lg:inset-64">
+          <img src={image} alt="" className="h-[500px] w-full object-cover" />
+          <div className="absolute h-[180px] bg-white p-10 md:rounded-lg opacity-70 top-36 inset-2 md:inset-[10rem] lg:inset-36">
             <SectionTitle
               title="About"
               description=" Welcome to InkSpire, where stories come alive and knowledge knows no

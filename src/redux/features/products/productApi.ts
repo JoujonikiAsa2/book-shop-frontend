@@ -19,7 +19,6 @@ const productApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-      providesTags: ["products"],
       transformResponse: (response: TResponseRedux<TProduct[] | undefined>) => {
         return {
           data: response.data,
@@ -34,7 +33,6 @@ const productApi = baseApi.injectEndpoints({
           methods: "GET",
         };
       },
-      providesTags: ["products"],
     }),
     createAnProduct: builder.mutation({
       query: (productInfo: Partial<TProduct>) => ({

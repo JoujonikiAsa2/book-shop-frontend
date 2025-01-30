@@ -6,15 +6,14 @@ export const sendEmail = (
   templateID: string,
   publicId: string,
   templateParams: Record<string, unknown>,
-  toastId:string | number
+  toastId: string | number
 ) => {
-
   emailjs.send(serviceID, templateID, templateParams, publicId).then(
-    (response) => {
-      toast.success("Email sent successfully",{id: toastId})
+    () => {
+      toast.success("Email sent successfully", { id: toastId });
     },
-    (error) => {
-      toast.error("Email sent successfully", {id: toastId})
+    () => {
+      toast.error("Email sent successfully", { id: toastId });
     }
   );
 };

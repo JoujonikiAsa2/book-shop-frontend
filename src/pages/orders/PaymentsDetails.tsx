@@ -18,7 +18,7 @@ import { Loader } from "lucide-react";
 
 const PaymentsDetails = () => {
   const user = useAppSelector(selectCurrentUser)
-  const { data:paymentData, error, isFetching, isLoading } = useGetUserOrderQuery(
+  const { data:paymentData, isFetching, isLoading } = useGetUserOrderQuery(
   user?.user as string);
   console.log(paymentData)
   if (isFetching || isLoading) {

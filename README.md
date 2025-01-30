@@ -1,50 +1,64 @@
-# React + TypeScript + Vite
+## 1-Book Shop API
+This is a book shop application for managing a bookshop and is built with React JS, TupeScript, Node.js, Express.js, Mongoose and MongoDB. It enables book management, order placement, and revenue tracking. It also includes some exciting features, such as search and filtering. It also allows searching by category.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Link](https://book-shop-joujonikiasa2s-projects.vercel.app/)
+[Backend Link](https://github.com/JoujonikiAsa2/Book-Shop/)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
+1. Feature
+2. Technologies
+3. Getting Started Locally
+4. API Endpoints
+  
 
-## Expanding the ESLint configuration
+## Features For User
+1. Find Book
+2. Filtering
+   - Search with a searchTerm query parameter.
+   - Support for partial and case-insensitive searches.
+3. Order Placement
+   - Place an Order and update the inventory automatically.
+4. View orders and Payment History
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features For Admin
+1. Find Book, Create book, Update Book, Delete Book
+2. Filtering
+   - Search with a searchTerm query parameter.
+   - Support for partial and case-insensitive searches.
+3. Order Placement
+   - Place an Order and update the inventory automatically.
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies
+- React JS
+- Node.js
+- Express.js.
+- MongoDB
+- Mongoose
+- TypeScript
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+
+## Getting Started Locally
+1. Clone this repository to your local machine:
+```bash
+git clone https://github.com/JoujonikiAsa2/book-shop-frontend
 ```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Move to the cloned directory
+```bash
+cd book-shop-frontend
 ```
+3. Install Dependencies
+```bash
+npm i
+```
+4. Configure Environment Variables
+```bash
+VITE_EMAILJS_SERVICEID=service_396786hqz71
+VITE_EMAILJS_TEMPLATEID=template_q5vverrtetra
+VITE_EMAILJS_PUBLICKEY=S8CfNWCrtertDQv5LdlSv6
+```
+5. Start the local Server:
+```bash
+npm run dev
+
+

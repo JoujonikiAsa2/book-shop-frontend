@@ -21,7 +21,7 @@ const Featured = () => {
     <div className="w-full pt-28">
       <SectionTitle title="Featured Product" description="Check out our featured products" />
       <div className="max-w-7xl mx-auto pt-12 flex flex-col justify-center items-center">
-        {isFetching ? (
+        {isFetching || isLoading ? (
           <div className="w-full h-full flex justify-center items-center gap-2">
             {[1,2,3,4,5].map((_, index) => (
               <div className="flex flex-col space-y-3" key={index}>

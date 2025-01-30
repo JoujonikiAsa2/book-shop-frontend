@@ -12,9 +12,11 @@ import BSForm from "@/components/form/Form";
 import BSInput from "@/components/form/Input";
 import { FieldValues, useForm } from "react-hook-form";
 import { TQueryParam } from "@/types/global";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const AllProducts = () => {
   const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const form = useForm();
   const { resetField } = form;
 
@@ -44,6 +46,29 @@ const AllProducts = () => {
     refetch();
     resetField("minPrice", { defaultValue: "" });
     resetField("maxPrice", { defaultValue: "" });
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+      queryParam.push({ name: "page", value: currentPage - 1 });
+      setParams(queryParam);
+    } else {
+      queryParam.push({ name: "page", value: currentPage });
+      setParams(queryParam);
+      setCurrentPage(currentPage);
+    }
+  };
+  const handleNext = () => {
+    if (currentPage > 0 && currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      queryParam.push({ name: "page", value: currentPage + 1 });
+      setParams(queryParam);
+    } else {
+      setCurrentPage(totalPages - 1);
+      queryParam.push({ name: "page", value: totalPages - 1 });
+      setParams(queryParam);
+    }
   };
 
   console.log("total pages", totalPages, productData);
@@ -120,23 +145,36 @@ const AllProducts = () => {
           ))}
       </div>
 
-      <div className="flex justify-center items-center gap-2 pb-4">
+      <div className="flex justify-center items-center gap-2 pb-4 py-4">
+        <div>
+          <Button size={"sm"} variant={"outline"} onClick={handlePrev}>
+            <ArrowLeft />
+          </Button>
+        </div>
         <div className="flex justify-center items-center gap-2">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-            (item: number, index: number) => (
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .slice(0.3)
+            .map((item: number, index: number) => (
               <Button
                 key={index}
+                size={"sm"}
                 variant={"outline"}
                 onClick={() => {
                   queryParam.push({ name: "page", value: item });
                   setParams(queryParam);
+                  setCurrentPage(item);
                 }}
               >
                 {item}
               </Button>
-            )
-          )}
+            ))}
         </div>
+        <div>
+          <Button size={"sm"} variant={"outline"} onClick={handleNext}>
+            <ArrowRight />
+          </Button>
+        </div>
+      </div>
         <div>
           <Input
             type="number"
@@ -149,7 +187,6 @@ const AllProducts = () => {
           />
         </div>
       </div>
-    </div>
   );
 };
 

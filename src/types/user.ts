@@ -8,5 +8,7 @@ export type TUser = {
     isDeactivate: boolean,
     isBlocked: boolean,
     isDeleted: boolean,
+    updatedAd: string,
+    createdAt: string,
     __v:number
 }

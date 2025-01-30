@@ -1,5 +1,3 @@
-import { CreditCard, Home, Inbox, Settings } from "lucide-react"
-
 import {
   Sidebar,
   SidebarContent,
@@ -10,32 +8,27 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "Orders",
-    url: "/dashboard/order-details",
-    icon: Inbox,
-  },
-  {
-    title: "Payment Details",
-    url: "/dashboard/payment-details",
-    icon: CreditCard ,
-  },
-  {
-    title: "Settings",
-    url: "/dashboard/profile-setting",
-    icon: Settings,
-  },
-]
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { adminSidebarItems } from "@/routes/adminRoutes";
+import { userSidebarItems } from "@/routes/userRoutes";
 
 const DashboardSidebar = () => {
+  
+  const user = useAppSelector(selectCurrentUser);
+  let sidebarItems;
+  switch (user?.role) {
+    case 'user':
+      sidebarItems = userSidebarItems
+      break;
+    case 'admin':
+      sidebarItems = adminSidebarItems
+      break;
+    default:
+      break;
+  }
+
+  console.log(sidebarItems)
   return (
     <Sidebar>
       <SidebarContent>
@@ -43,7 +36,7 @@ const DashboardSidebar = () => {
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {sidebarItems?.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>

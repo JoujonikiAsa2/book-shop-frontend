@@ -7,12 +7,13 @@ import AllProducts from "@/pages/all-products/AllProducts";
 import ProductDetails from "@/pages/all-products/ProductDetails";
 import CheckOut from "@/pages/orders/CheckOut";
 import Register from "@/pages/Register";
-import ProtectedRoute from "@/components/layouts/ProtectedRoute";
 import Login from "@/pages/Login";
-import PaymentsDetails from "../pages/orders/PaymentsDetails";
-import Orders from "@/pages/orders/Orders";
+import { generateRouter } from "@/utils/generateRouter";
+import { adminPaths } from "./adminRoutes";
+import { userPaths } from "./userRoutes";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import PaymentProcessing from "@/pages/orders/PaymentProcessing";
+import ProtectedRoute from "@/components/layouts/ProtectedRoute";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -40,43 +41,24 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/checkout/:productId",
-        element: (
-          <ProtectedRoute>
+        element: 
             <CheckOut />
-          </ProtectedRoute>
-        ),
+      },
+      {
+        path: "payment-processing",
+        element: <ProtectedRoute><PaymentProcessing /></ProtectedRoute>,
       },
     ],
   },
   {
-    path: "/dashboard",
+    path: "/dashboard/user",
     element: <DashboardLayout />,
-    children: [
-      {
-        path: "payment-details",
-        element: (
-          <ProtectedRoute>
-            <PaymentsDetails />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "payment-processing",
-        element: (
-          <ProtectedRoute>
-            <PaymentProcessing />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "order-details",
-        element: (
-          <ProtectedRoute>
-            <Orders />
-          </ProtectedRoute>
-        ),
-      },
-    ],
+    children: generateRouter(userPaths),
+  },
+  {
+    path: "/dashboard/admin",
+    element: <DashboardLayout />,
+    children: generateRouter(adminPaths),
   },
   {
     path: "/login",

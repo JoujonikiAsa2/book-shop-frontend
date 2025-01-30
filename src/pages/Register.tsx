@@ -23,7 +23,7 @@ const Register = () => {
       if (res.error) {
         return toast.error("Failed to register, Try again letter", { id: toastId, duration: 2000 });
       }
-      toast.success("Logged in", { id: toastId, duration: 2000 });
+      toast.success("Registered Successfully", { id: toastId, duration: 2000 });
     } catch (err: any) {
       console.log(err);
       toast.error("something went wrong", { id: toastId, duration: 2000 });

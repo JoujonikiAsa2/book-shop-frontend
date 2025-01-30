@@ -36,6 +36,13 @@ const productApi = baseApi.injectEndpoints({
       },
       providesTags: ["products"],
     }),
+    createAnProduct: builder.mutation({
+      query: (productInfo: Partial<TProduct>) => ({
+        url: "/products",
+        method: "POST",
+        body: productInfo,
+      }),
+    }),
   }),
   
 });
@@ -43,4 +50,5 @@ const productApi = baseApi.injectEndpoints({
 export const {
   useGetProductsQuery,
   useGetProductDetailsQuery,
+  useCreateAnProductMutation
 } = productApi;

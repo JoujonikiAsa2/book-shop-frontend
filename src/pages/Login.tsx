@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { setUser, TUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { verifyToken } from "@/utils/veryfyToken";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [passwordType, setPassword] = useState<string>("password");
@@ -19,19 +19,29 @@ const Login = () => {
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation()
+
+  console.log(location)
 
   const handleLogin = async (data: FieldValues) => {
-    const toastId = toast.loading("Login...");
     try {
+      const toastId = toast.loading("Login...");
       const res = await login(data).unwrap();
       console.log(res);
       const user = verifyToken(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged in", { id: toastId, duration: 2000 });
-      navigate('/')
+      {
+        if(user.role === 'user'){
+          navigate(location.state ||'/')
+        }
+        else if(user.role === 'admin'){
+          navigate(location.state || '/dashboard/admin/manage-orders')
+        }
+      }
     } catch (err: any) {
       console.log(err);
-      toast.error("something went wrong", { id: toastId, duration: 2000 });
+      toast.error(err?.data?.message);
     }
   };
 
@@ -44,7 +54,7 @@ const Login = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="w-400px bg-white p-12  relative">
+      <div className="w-[400px] bg-white p-12  relative">
         <BSForm form={form} onSubmit={handleLogin}>
           <BSInput
             form={form}

@@ -1,9 +1,10 @@
-import { Heart, ShoppingCart, User } from "lucide-react";
+import { Heart, LogOutIcon, ShoppingCart, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useGetMeQuery } from "@/redux/features/user/userApi";
-import { useAppSelector } from "@/redux/hooks";
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { Button } from "../ui/button";
 const items = [
   {
     icon: <Heart size={20} />,
@@ -18,9 +19,9 @@ const items = [
 ];
 
 const Header = () => {
-  const user = useAppSelector(selectCurrentUser)
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectCurrentUser);
   const { currentData } = useGetMeQuery(undefined);
-  console.log(currentData);
   return (
     <div className="border py-2 hidden sm:hidden md:hidden lg:block bg-black text-white">
       <div className="flex justify-between items-center mx-[5%]">
@@ -43,7 +44,8 @@ const Header = () => {
             </PopoverTrigger>
             <PopoverContent className="w-80 space-y-4 font-semibold">
               <div>
-              <NavLink
+                {user === null ? (
+                  <NavLink
                     to="/login"
                     className={({ isActive }) =>
                       isActive ? "menu-item active" : "menu-item"
@@ -52,6 +54,19 @@ const Header = () => {
                   >
                     <li style={{ listStyle: "none" }}>Login</li>
                   </NavLink>
+                ) : (
+                  <div className="flex flex-col gap-4 mt-8">
+                    <h4 className="text-center capitalize">{currentData?.data?.name}</h4>
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => dispatch(logout())}
+                    >
+                      <LogOutIcon />
+                      Logout
+                    </Button>
+                  </div>
+                )}
               </div>
             </PopoverContent>
           </Popover>

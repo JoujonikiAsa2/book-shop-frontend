@@ -83,9 +83,20 @@ const Navbar = () => {
           {items.map((item) => (
             <div key={item.key}>{item.label}</div>
           ))}
-          {user !== null  && (
+          {user?.role == "user" && (
             <NavLink
-              to="/dashboard"
+              to="/dashboard/user/order-details"
+              className={({ isActive }) =>
+                isActive ? "menu-item active" : "menu-item"
+              }
+              style={{ textDecoration: "none" }}
+            >
+              <li style={{ listStyle: "none" }}>Dashboard</li>
+            </NavLink>
+          )}
+          {user?.role == "admin" && (
+            <NavLink
+              to={`/dashboard/admin/manage-orders`}
               className={({ isActive }) =>
                 isActive ? "menu-item active" : "menu-item"
               }
@@ -108,10 +119,33 @@ const Navbar = () => {
                   {items.map((item) => (
                     <div key={item.key}>{item.label}</div>
                   ))}
-                  {user !== null && (
+                  {user?.role === "user" && (
                     <>
                       <NavLink
-                        to="/dashboard"
+                        to={`/dashboard/user/order-details`}
+                        className={({ isActive }) =>
+                          isActive ? "menu-item active" : "menu-item"
+                        }
+                        style={{ textDecoration: "none" }}
+                      >
+                        <li style={{ listStyle: "none" }}>Dashboard</li>
+                      </NavLink>
+                      <div className="mt-8">
+                        <Button
+                          variant="outline"
+                          className="w-full"
+                          onClick={() => dispatch(logout())}
+                        >
+                          <LogOutIcon />
+                          Logout
+                        </Button>
+                      </div>
+                    </>
+                  )}
+                  {user?.role === "admin" && (
+                    <>
+                      <NavLink
+                        to={`/dashboard/admin/manage-orders`}
                         className={({ isActive }) =>
                           isActive ? "menu-item active" : "menu-item"
                         }
@@ -145,9 +179,28 @@ const Navbar = () => {
                 </div>
               </PopoverTrigger>
               <PopoverContent className="w-80 space-y-4 font-semibold">
-                <div>
-                  <Link to="/dashboard">Dashboard</Link>
-                </div>
+                {user?.role == "user" && (
+                  <NavLink
+                    to="/dashboard/user/order-details"
+                    className={({ isActive }) =>
+                      isActive ? "menu-item active" : "menu-item"
+                    }
+                    style={{ textDecoration: "none" }}
+                  >
+                    <li style={{ listStyle: "none" }}>Dashboard</li>
+                  </NavLink>
+                )}
+                {user?.role == "admin" && (
+                  <NavLink
+                    to={`/dashboard/admin/manage-orders`}
+                    className={({ isActive }) =>
+                      isActive ? "menu-item active" : "menu-item"
+                    }
+                    style={{ textDecoration: "none" }}
+                  >
+                    <li style={{ listStyle: "none" }}>Dashboard</li>
+                  </NavLink>
+                )}
               </PopoverContent>
             </Popover>
           </div>

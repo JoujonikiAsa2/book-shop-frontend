@@ -8,7 +8,7 @@ const ProtectedRoute = ({children}:{children:ReactNode}) => {
     const token = useAppSelector(selectCurrentToken)
     if(!token){
         toast.error("Login for further access", {duration: 3000})
-        return <Navigate to="/login" replace={true}/>
+        return <Navigate to="/login" state={location.pathname} replace={true}/>
     }
     return children
 };

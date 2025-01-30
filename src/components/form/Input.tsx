@@ -8,8 +8,9 @@ type TInputProps = {
   name: string;
   label?: string;
   disabled?: boolean;
-  placeholder: string;
+  placeholder?: string;
   required?: boolean;
+  className?: string;
   form: any;
 };
 
@@ -20,6 +21,7 @@ const BSInput = ({
   placeholder,
   form,
   required,
+  className
 }: TInputProps) => {
   return (
     <FormField
@@ -34,6 +36,7 @@ const BSInput = ({
                 placeholder={placeholder}
                 {...field}
                 required={required}
+                className={className}
               />
           </FormControl>
         </FormItem>

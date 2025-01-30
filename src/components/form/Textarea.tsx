@@ -7,7 +7,7 @@ type TTextareaProps = {
   name: string;
   label?: string;
   disabled?: boolean;
-  placeholder: string;
+  placeholder?: string;
   required?: boolean;
   form: any;
 };

@@ -42,14 +42,14 @@ const PaymentsDetails = () => {
         </TableHeader>
         <TableBody>
           {paymentData?.data?.map((order: TOrder) => (
-            <TableRow key={order.transaction.id}>
+            <TableRow key={order?.transaction?.id}>
               <TableCell>
-                {order.transaction.id}
+                {order?.transaction?.id}
               </TableCell>
-              <TableCell>{order.transaction.bank_status}</TableCell>
-              <TableCell>{order.transaction.method}</TableCell>
+              <TableCell>{order?.transaction?.bank_status}</TableCell>
+              <TableCell>{order?.transaction?.method}</TableCell>
               <TableCell className="text-right">
-                {order.totalPrice} Taka
+                {order?.totalPrice} Taka
               </TableCell>
               <TableCell className="text-right">
                 <Button

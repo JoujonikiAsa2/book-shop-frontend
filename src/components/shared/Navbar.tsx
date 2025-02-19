@@ -1,12 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import { Heart, LogOutIcon, Menu, ShoppingCartIcon, User } from "lucide-react";
+import { LogOutIcon, Menu, ShoppingCartIcon, User } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useGetMeQuery } from "@/redux/features/user/userApi";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { RootState } from "@/redux/store";
 const items = [
   {
     label: (
@@ -70,6 +71,8 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const { currentData } = useGetMeQuery(undefined);
   const user = useAppSelector(selectCurrentUser);
+  const totalProducts = useAppSelector((state: RootState) => state.cart.totalProducts)
+  console.log(totalProducts)
   return (
     <div className="py-8 border-b">
       <div className="flex justify-between items-center mx-[5%]">
@@ -107,9 +110,13 @@ const Navbar = () => {
           )}
         </div>
         <div className="md:flex lg:hidden flex gap-4">
-          <div className="flex gap-4 items-center">
-            <Heart size={20} />
-            <ShoppingCartIcon size={20} />
+          <div className="flex gap-5 items-center">
+            <NavLink to="/checkout" className="relative">
+              <ShoppingCartIcon size={20} />
+              <div className="absolute inset-0 translate-x-2 -translate-y-3 w-fit flex justify-center items-center p-1 rounded-full bg-black text-white text-xs">
+                {`${totalProducts > 10 ? 10 + "+" : totalProducts}`}
+              </div>
+            </NavLink>
             <Sheet>
               <SheetTrigger asChild>
                 <Menu />
@@ -180,11 +187,14 @@ const Navbar = () => {
               </PopoverTrigger>
               <PopoverContent className="w-80 space-y-4 font-semibold">
                 {user?.role == "user" && (
-                    <li style={{ listStyle: "none" }}>{currentData?.data?.name}</li>
+                  <li style={{ listStyle: "none" }}>
+                    {currentData?.data?.name}
+                  </li>
                 )}
                 {user?.role == "admin" && (
-  
-                    <li style={{ listStyle: "none" }}>{currentData?.data?.name}</li>
+                  <li style={{ listStyle: "none" }}>
+                    {currentData?.data?.name}
+                  </li>
                 )}
                 {!user && (
                   <NavLink

@@ -22,7 +22,7 @@ const PaymentProcessing = () => {
   } else if (
     ["Success", "Failed", "Canceled"].includes(paymentData?.data[0].bank_status)
   ) {
-    window.location.replace("http://localhost:5173/dashboard/payment-details");
+    window.location.replace("http://localhost:5173/dashboard/user/payment-details");
   }
   return <div className="w-[70vw] text center">Failed to payment</div>;
 };

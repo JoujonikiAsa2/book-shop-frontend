@@ -1,10 +1,13 @@
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
+import { add } from "@/redux/features/orders/cartSlice";
 import { useGetProductDetailsQuery } from "@/redux/features/products/productApi";
 import { TProduct } from "@/types/product";
 import { Loader } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 export interface TProductDetails {
   imgUrl: string;
@@ -17,7 +20,8 @@ export interface TProductDetails {
 
 const ProductDetails = () => {
   const { id } = useParams();
-  console.log(id);
+
+  const dispatch = useDispatch();
   const { data, isLoading, isFetching } = useGetProductDetailsQuery(
     id as string
   );
@@ -33,7 +37,7 @@ const ProductDetails = () => {
 
   return (
     <div className="bg-gray-100 h-[100vh] flex items-center">
-      <div className="max-w-7xl h-[500px] mx-auto flex gap-10 bg-white shadow-md p-8 rounded-lg">
+      <div className="max-w-7xl h-[500px] mx-auto flex flex-col md:flex-row gap-10 bg-white shadow-md p-8 rounded-lg">
         <div className="w-1/3">
           <img
             src={imgUrl}
@@ -43,7 +47,7 @@ const ProductDetails = () => {
         </div>
 
         <div className="w-2/3">
-          <h1 className="text-3xl font-bold mb-4">{name}</h1>
+          <h1 className="text-lg md:text-xl font-bold mb-4">{name}</h1>
           <p className="text-lg text-gray-700 mb-4">{description}</p>
           <div className="mb-2">
             <span className="font-semibold text-gray-900">Author:</span>{" "}
@@ -54,27 +58,23 @@ const ProductDetails = () => {
             {category}
           </div>
           <div className="mb-4">
-            <span className="font-semibold text-gray-900">Price:</span>
+            <span className="font-semibold text-gray-900">Price: </span>
             {price.toFixed(2)} Taka
           </div>
           <div className="flex gap-4">
             <div>
               <Button
-              variant="outline"
+                variant="outline"
                 style={{ marginTop: "9px" }}
                 className=" rounded-lg py-2 px-4"
+                onClick={() => {
+                  dispatch(add(_id));
+                  toast.success("Add to cart successfully");
+                }}
               >
                 Add to Cart
               </Button>
             </div>
-            <Link to={`/checkout/${_id}`}>
-              <Button
-                style={{ marginTop: "9px" }}
-                className=" rounded-lg py-2 px-4"
-              >
-                Buy Now
-              </Button>
-            </Link>
           </div>
         </div>
       </div>

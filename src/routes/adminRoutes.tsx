@@ -2,14 +2,20 @@ import CreateProduct from "@/pages/all-products/CreateProduct";
 import ManageOrder from "@/pages/management/ManageOrder";
 import ManageProducts from "@/pages/management/ManageProducts";
 import ManageUsers from "@/pages/management/ManageUsers";
-import Orders from "@/pages/orders/Orders";
+import UpdatePassword from "@/pages/profile/UpdatePassword";
+import UpdateProfile from "@/pages/profile/UpdateProfile";
 import { File, FileBadge, PlusIcon, User2 } from "lucide-react";
-import { Home, Settings } from "lucide-react"
+import { Home } from "lucide-react"
+
 
 export const adminPaths = [
   {
     path: "profile-setting",
-    element: <Orders />,
+    element: < UpdateProfile/>,
+  },
+  {
+    path: "password-setting",
+    element: < UpdatePassword/>,
   },
   {
     path: "manage-orders",
@@ -31,14 +37,9 @@ export const adminPaths = [
 
 export const adminSidebarItems = [
     {
-      title: "Home",
-      url: "/",
-      icon: Home,
-    },
-    {
-      title: "Settings",
-      url: "profile-setting",
-      icon: Settings,
+      title: "Create Product",
+      url: "create-products",
+      icon: PlusIcon,
     },
     {
       title: "Manage Products",
@@ -56,8 +57,8 @@ export const adminSidebarItems = [
       icon: User2,
     },
     {
-      title: "Create Product",
-      url: "create-products",
-      icon: PlusIcon,
+      title: "Home",
+      url: "/",
+      icon: Home,
     },
 ]

@@ -3,7 +3,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -12,8 +11,9 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { adminSidebarItems } from "@/routes/adminRoutes";
 import { userSidebarItems } from "@/routes/userRoutes";
+import React from "react";
 
-const DashboardSidebar = () => {
+const DashboardSidebar = ({... props}:React.ComponentProps<typeof Sidebar>) => {
   
   const user = useAppSelector(selectCurrentUser);
   let sidebarItems;
@@ -30,11 +30,11 @@ const DashboardSidebar = () => {
 
   console.log(sidebarItems)
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon" {...props}>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
+            
             <SidebarMenu>
               {sidebarItems?.map((item) => (
                 <SidebarMenuItem key={item.title}>

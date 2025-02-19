@@ -21,7 +21,7 @@ const UpdatePassword = () => {
 
   const passwordHandler = async (data: FieldValues) => {
     try {
-      const toastId = toast.loading("Login...");
+      const toastId = toast.loading("Changing...");
       if (user !== null) {
         if (data.newPassword === data.confirmPassword) {
           const res = await changePassword(data);

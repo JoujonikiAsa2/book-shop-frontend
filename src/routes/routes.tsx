@@ -41,12 +41,15 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/checkout/:productId",
-        element: 
-            <CheckOut />
+        element: <ProtectedRoute><CheckOut />,</ProtectedRoute>
       },
       {
         path: "payment-processing",
-        element: <ProtectedRoute><PaymentProcessing /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <PaymentProcessing />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

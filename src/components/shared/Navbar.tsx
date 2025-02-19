@@ -180,25 +180,21 @@ const Navbar = () => {
               </PopoverTrigger>
               <PopoverContent className="w-80 space-y-4 font-semibold">
                 {user?.role == "user" && (
-                  <NavLink
-                    to="/dashboard/user/order-details"
-                    className={({ isActive }) =>
-                      isActive ? "menu-item active" : "menu-item"
-                    }
-                    style={{ textDecoration: "none" }}
-                  >
-                    <li style={{ listStyle: "none" }}>Dashboard</li>
-                  </NavLink>
+                    <li style={{ listStyle: "none" }}>{currentData?.data?.name}</li>
                 )}
                 {user?.role == "admin" && (
+  
+                    <li style={{ listStyle: "none" }}>{currentData?.data?.name}</li>
+                )}
+                {!user && (
                   <NavLink
-                    to={`/dashboard/admin/manage-orders`}
+                    to={`/login`}
                     className={({ isActive }) =>
                       isActive ? "menu-item active" : "menu-item"
                     }
                     style={{ textDecoration: "none" }}
                   >
-                    <li style={{ listStyle: "none" }}>Dashboard</li>
+                    <li style={{ listStyle: "none" }}>Login</li>
                   </NavLink>
                 )}
               </PopoverContent>

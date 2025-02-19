@@ -66,7 +66,7 @@ const ManageOrder = () => {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Order ID</TableHead>
-            <TableHead>Transaction ID</TableHead>
+            {/* <TableHead>Transaction ID</TableHead> */}
             <TableHead>Payment Status</TableHead>
             <TableHead className="text-right">Total Price</TableHead>
             <TableHead className="text-right">Action</TableHead>
@@ -75,7 +75,7 @@ const ManageOrder = () => {
         <TableBody>
           {orderData?.data?.map((order: TOrder) => (
             <TableRow key={order?._id}>
-              <TableCell>{order?._id}</TableCell>
+              {/* <TableCell>{order?._id}</TableCell> */}
               <TableCell>{order?.transaction.id}</TableCell>
               <TableCell>
                 <div

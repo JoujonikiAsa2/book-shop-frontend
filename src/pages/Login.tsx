@@ -19,9 +19,7 @@ const Login = () => {
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const location = useLocation()
-
-  console.log(location)
+  const location = useLocation();
 
   const handleLogin = async (data: FieldValues) => {
     try {
@@ -31,13 +29,10 @@ const Login = () => {
       const user = verifyToken(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged in", { id: toastId, duration: 2000 });
-      {
-        if(user.role === 'user'){
-          navigate(location.state ||'/')
-        }
-        else if(user.role === 'admin'){
-          navigate(location.state || '/dashboard/admin/manage-orders')
-        }
+      if (user.role === "user") {
+        navigate(location.state || "/");
+      } else if (user.role === "admin") {
+        navigate(location.state || "/dashboard/admin/manage-orders");
       }
     } catch (err: any) {
       console.log(err);

@@ -124,11 +124,12 @@ const ManageProducts = () => {
   };
 
   return (
-    <div className="w-max-7xl  m-10 jost-thin">
-      <Table className="lg:w-[1000px] max-w-7xl mx-auto border rounded-lg">
+    <>
+    {totalPages>=1 ? <div className="w-fit lg:w-[80rem] m-10 jost-thin">
+      <Table className="w-full border rounded-lg">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Product Name</TableHead>
+            <TableHead className="">Product Name</TableHead>
             <TableHead>Author</TableHead>
             <TableHead>Price</TableHead>
             <TableHead>Avaiability</TableHead>
@@ -310,7 +311,10 @@ const ManageProducts = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </div> : <div className="text-center p-10">
+          <h2>No products available</h2>
+        </div>}
+    </>
   );
 };
 

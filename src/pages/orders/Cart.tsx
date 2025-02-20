@@ -4,7 +4,7 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { add, remove } from "@/redux/features/orders/cartSlice";
 import { useGetProductsQuery } from "@/redux/features/products/productApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { Loader, Minus, MinusCircle, Plus, PlusCircle } from "lucide-react";
+import { Loader, Minus, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Cart = () => {

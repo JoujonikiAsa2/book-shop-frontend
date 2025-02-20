@@ -1,4 +1,6 @@
 import { baseApi } from "@/redux/api/baseApi";
+import { TQueryParam, TResponseRedux } from "@/types/global";
+import { TUser } from "@/types/user";
 
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,12 +10,28 @@ const userApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
-    getAllUsers: builder.query({
-      query: () => ({
-        url: "/users",
-        method: "GET",
-      }),
-    }),
+     getAllUsers: builder.query({
+          query: (args) => {
+            console.log(args);
+            const params = new URLSearchParams();
+            if (args) {
+              args.forEach((item: TQueryParam) => {
+                params.append(item.name, item.value as string);
+              });
+            }
+            return {
+              url: `/users`,
+              methods: "GET",
+              params: params,
+            };
+          },
+          transformResponse: (response: TResponseRedux<TUser[] | undefined>) => {
+            return {
+              data: response.data,
+              meta: response.meta,
+            };
+          },
+        }),
     updateProfile: builder.mutation({
       query: (data) => ({
         url: `/users/update-profile/${data?.userId}`,

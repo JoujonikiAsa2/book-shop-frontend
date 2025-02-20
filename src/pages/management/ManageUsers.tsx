@@ -113,8 +113,8 @@ const ManageUsers = () => {
   }
 
   return (
-    <div className="w-max-7xl  m-10 jost-thin">
-      <Table className="lg:w-[1000px] max-w-7xl mx-auto border rounded-lg overflow-x-scroll">
+    <div className="w-fit lg:w-[80rem]  m-10 jost-thin">
+      <Table className="w-full mx-auto border rounded-lg overflow-x-scroll">
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -128,7 +128,7 @@ const ManageUsers = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {userData?.data?.map((user: TUser) => (
+          {userData?.data?.map((user:TUser) => (
             <TableRow>
               <TableCell>{user?.name}</TableCell>
               <TableCell>{user?.email}</TableCell>
@@ -289,7 +289,8 @@ const ManageUsers = () => {
           <TableRow></TableRow>
         </TableBody>
       </Table>
-      <div className="flex justify-center items-center gap-2 pb-4 py-4">
+      {
+        totalPages>=1 && <div className="flex justify-center items-center gap-2 pb-4 py-4">
         <div>
           <Button size={"sm"} variant={"outline"} onClick={handlePrev}>
             <ArrowLeft />
@@ -319,6 +320,7 @@ const ManageUsers = () => {
           </Button>
         </div>
       </div>
+      }
     </div>
   );
 };

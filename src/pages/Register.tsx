@@ -10,11 +10,13 @@ import {
   useRegisterMutation,
 } from "@/redux/features/auth/authApi";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate()
   const [passwordType, setPassword] = useState<string>("password");
   const form = useForm();
+  const { resetField } = form;
   const [register] = useRegisterMutation();
   const handleLogin = async (data: FieldValues) => {
     const toastId = toast.loading("Login...");
@@ -24,6 +26,11 @@ const Register = () => {
         return toast.error("Failed to register, Try again letter", { id: toastId, duration: 2000 });
       }
       toast.success("Registered Successfully", { id: toastId, duration: 2000 });
+      resetField("name", { defaultValue: "" });
+      resetField("phone", { defaultValue: "" });
+      resetField("email", { defaultValue: "" });
+      resetField("password", { defaultValue: "" });
+      navigate("/login");
     } catch (err: any) {
       console.log(err);
       toast.error("something went wrong", { id: toastId, duration: 2000 });

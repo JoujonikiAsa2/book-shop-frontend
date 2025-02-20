@@ -12,6 +12,7 @@ import { setUser, TUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { verifyToken } from "@/utils/veryfyToken";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setUserId } from "@/redux/features/orders/cartSlice";
 
 const Login = () => {
   const [passwordType, setPassword] = useState<string>("password");
@@ -27,7 +28,9 @@ const Login = () => {
       const res = await login(data).unwrap();
       console.log(res);
       const user = verifyToken(res.data.accessToken) as TUser;
+      console.log(user)
       dispatch(setUser({ user: user, token: res.data.accessToken }));
+      dispatch(setUserId(user?.user as string));
       toast.success("Logged in", { id: toastId, duration: 2000 });
       if (user.role === "user") {
         navigate(location.state || "/");

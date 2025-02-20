@@ -5,7 +5,6 @@ import About from "@/pages/about/About";
 import Contact from "@/pages/contact/Contact";
 import AllProducts from "@/pages/all-products/AllProducts";
 import ProductDetails from "@/pages/all-products/ProductDetails";
-import CheckOut from "@/pages/orders/CheckOut";
 import Register from "@/pages/Register";
 import Login from "@/pages/Login";
 import { generateRouter } from "@/utils/generateRouter";
@@ -14,6 +13,8 @@ import { userPaths } from "./userRoutes";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import PaymentProcessing from "@/pages/orders/PaymentProcessing";
 import ProtectedRoute from "@/components/layouts/ProtectedRoute";
+import Cart from "@/pages/orders/Cart";
+import ProceedCheckout from "@/pages/orders/ProceedCheckout";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -40,8 +41,16 @@ export const routes = createBrowserRouter([
         element: <ProductDetails />,
       },
       {
+        path: "/cart",
+        element: <Cart />
+      },
+      {
         path: "/checkout",
-        element: <ProtectedRoute><CheckOut /></ProtectedRoute>
+        element: <ProtectedRoute><ProceedCheckout /></ProtectedRoute>
+      },
+      {
+        path: "/checkout/:id",
+        element: <ProtectedRoute><ProceedCheckout /></ProtectedRoute>
       },
       {
         path: "/payment-processing",

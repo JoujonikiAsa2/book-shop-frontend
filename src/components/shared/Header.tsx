@@ -18,7 +18,7 @@ const Header = () => {
       <div className="flex justify-between items-center mx-[5%]">
         <div>Contact: +1 234 567 890</div>
         <div className="flex justify-between items-center gap-8">
-          <NavLink to="/checkout" className="relative">
+          <NavLink to="/cart" className="relative">
             <ShoppingCart size={20} />
             <div className="absolute inset-0 translate-x-2 -translate-y-2 w-fit flex justify-center items-center p-1 rounded-full bg-white text-black text-xs">
               {`${totalProducts > 10 ? 10 + "+" : totalProducts}`}

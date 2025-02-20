@@ -1,9 +1,12 @@
+import { reset } from "@/redux/features/orders/cartSlice";
 import { useVerifyPaymentQuery } from "@/redux/features/orders/orderApi";
+import { useAppDispatch } from "@/redux/hooks";
 import { Loader } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const PaymentProcessing = () => {
   const location = useLocation();
+  const dispatch = useAppDispatch()
   const orderId = location.search
     .slice(1, location.search.length)
     .split("=")[1];
@@ -15,16 +18,28 @@ const PaymentProcessing = () => {
   console.log(paymentData, orderId);
   if (isFetching || isLoading) {
     return (
-      <div className="h-[80vh] w-[70vw] flex items-center justify-center">
+      <div className="h-[80vh] w-full flex items-center justify-center">
         <Loader size={32} className="w-6 h-6 animate-spin" />
       </div>
     );
   } else if (
     ["Success", "Failed", "Canceled"].includes(paymentData?.data[0].bank_status)
   ) {
-    window.location.replace("http://localhost:5173/dashboard/user/payment-details");
+    if(paymentData?.data[0].bank_status === "Success"){
+      dispatch(reset())
+    }
+    window.location.replace(
+      "http://localhost:5173/dashboard/user/payment-details"
+    );
+  } else {
+    return (
+      <div className="w-full text center">
+        <div className="bg-red-500 w-72 h-32 text-xl font-bold uppercase">
+          Failed to payment
+        </div>
+      </div>
+    );
   }
-  return <div className="w-[70vw] text center">Failed to payment</div>;
 };
 
 export default PaymentProcessing;

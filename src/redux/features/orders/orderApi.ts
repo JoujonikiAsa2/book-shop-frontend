@@ -1,4 +1,5 @@
-import { orderInfo } from "@/pages/orders/CheckOut";
+
+import { orderInfo } from "@/pages/orders/ProceedCheckout";
 import { baseApi } from "@/redux/api/baseApi";
 import { TQueryParam, TResponseRedux } from "@/types/global";
 import { TOrder } from "@/types/order";

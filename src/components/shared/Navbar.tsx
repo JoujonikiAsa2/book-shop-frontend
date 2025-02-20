@@ -111,7 +111,7 @@ const Navbar = () => {
         </div>
         <div className="md:flex lg:hidden flex gap-4">
           <div className="flex gap-5 items-center">
-            <NavLink to="/checkout" className="relative">
+            <NavLink to="/cart" className="relative">
               <ShoppingCartIcon size={20} />
               <div className="absolute inset-0 translate-x-2 -translate-y-3 w-fit flex justify-center items-center p-1 rounded-full bg-black text-white text-xs">
                 {`${totalProducts > 10 ? 10 + "+" : totalProducts}`}

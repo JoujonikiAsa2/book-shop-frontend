@@ -1,12 +1,14 @@
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { add } from "@/redux/features/orders/cartSlice";
 import { useGetProductDetailsQuery } from "@/redux/features/products/productApi";
+import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/product";
 import { Loader } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
 export interface TProductDetails {
@@ -20,11 +22,13 @@ export interface TProductDetails {
 
 const ProductDetails = () => {
   const { id } = useParams();
-
+  const user = useAppSelector(selectCurrentUser);
+  console.log(user);
   const dispatch = useDispatch();
   const { data, isLoading, isFetching } = useGetProductDetailsQuery(
     id as string
   );
+
   if (isFetching || isLoading) {
     return (
       <div className="h-[80vh] w-full flex items-center justify-center">
@@ -68,12 +72,22 @@ const ProductDetails = () => {
                 style={{ marginTop: "9px" }}
                 className=" rounded-lg py-2 px-4"
                 onClick={() => {
-                  dispatch(add(_id));
+                  dispatch(
+                    add({ userId: user?.user as string, productId: _id })
+                  );
                   toast.success("Add to cart successfully");
                 }}
               >
                 Add to Cart
               </Button>
+              <Link to={`/checkout/${id}`}>
+                <Button
+                  style={{ marginTop: "9px", marginLeft: "10px" }}
+                  className=" rounded-lg py-2 px-4"
+                >
+                  Buy Now
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

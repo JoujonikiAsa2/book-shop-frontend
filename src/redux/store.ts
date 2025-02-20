@@ -19,9 +19,14 @@ const persistConfig = {
   storage,
 };
 
+const sessionKey = localStorage.getItem("sessionKey") || "user";
+const cartPersistConfig = {
+  key: `${sessionKey}-cart`,
+  storage
+}
 
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
-const persistedCartReducer = persistReducer(persistConfig, cartReducer);
+const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
 export const store = configureStore({
 

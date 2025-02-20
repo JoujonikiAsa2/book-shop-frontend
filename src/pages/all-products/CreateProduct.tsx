@@ -31,7 +31,7 @@ const CreateProduct = () => {
   const [createProduct] = useCreateAnProductMutation();
 
   const handleOrder = async (data: FieldValues) => {
-    console.log(data)
+    console.log(data);
     const toastId = toast.loading("Creating...");
     const productInfo: Partial<TProduct> = {
       name: data.name,
@@ -91,7 +91,7 @@ const CreateProduct = () => {
             required={true}
             className="border-gray-400 "
           />
-          <Select>
+          <Select onValueChange={(value) => form.setValue("category", value)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Category" />
             </SelectTrigger>
@@ -100,7 +100,9 @@ const CreateProduct = () => {
                 <SelectItem value={"Fiction"}>Fiction</SelectItem>
                 <SelectItem value={"Science"}>Science</SelectItem>
                 <SelectItem value={"Poetry"}>Poetry</SelectItem>
-                <SelectItem value={"SelfDevelopment"}>SelfDevelopment</SelectItem>
+                <SelectItem value={"SelfDevelopment"}>
+                  SelfDevelopment
+                </SelectItem>
                 <SelectItem value={"Religious"}>Religious</SelectItem>
               </SelectGroup>
             </SelectContent>
@@ -132,7 +134,7 @@ const CreateProduct = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <Button type="submit">Confirm Order</Button>
+          <Button type="submit">Create Product</Button>
         </BSForm>
       </div>
     </div>

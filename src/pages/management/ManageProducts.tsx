@@ -1,4 +1,22 @@
+import BSForm from "@/components/form/Form";
+import BSInput from "@/components/form/Input";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 import {
   Table,
   TableBody,
@@ -7,22 +25,34 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetProductsQuery } from "@/redux/features/products/productApi";
+import {
+  useDeleteAProductMutation,
+  useGetProductsQuery,
+  useUpdateAProductMutation,
+} from "@/redux/features/products/productApi";
 import { TQueryParam } from "@/types/global";
 import { TProduct } from "@/types/product";
 import { ArrowLeft, ArrowRight, Delete, Edit, Loader } from "lucide-react";
 import { useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const ManageProducts = () => {
+  const form = useForm();
   const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
+  const [productInfo, setProductInfo] = useState<TProduct | undefined>(
+    undefined
+  );
   const queryParam: TQueryParam[] = [];
   const [currentPage, setCurrentPage] = useState<number>(1);
   const {
     data: productData,
+    refetch,
     isFetching,
     isLoading,
   } = useGetProductsQuery(params);
-  console.log(productData);
+  const [updateProduct] = useUpdateAProductMutation();
+  const [deleteProduct] = useDeleteAProductMutation();
 
   const totalPages = productData?.meta?.totalPage || 0;
 
@@ -61,6 +91,38 @@ const ManageProducts = () => {
     }
   };
 
+  console.log(productInfo);
+  const handleUpdateProduct = async (data: FieldValues) => {
+    console.log(data);
+    const productDetails: Partial<TProduct> = {
+      _id: productInfo?._id,
+      name: data.name !== undefined ? data.name : productInfo?.name,
+      author: data.author !== undefined ? data.author : productInfo?.author,
+      imgUrl: data.imgUrl !== undefined ? data.imgUrl : productInfo?.imgUrl,
+      price: data.price !== undefined ? data.price : productInfo?.price,
+      category:
+        data.category !== undefined ? data.category : productInfo?.category,
+      description:
+        data.description !== undefined
+          ? data.description
+          : productInfo?.description,
+      quantity:
+        data.quantity !== undefined ? data?.quantity : productInfo?.quantity,
+      availability: data.availability === "inStock" ? false : true,
+    };
+    const result = await updateProduct(productDetails);
+    console.log(result);
+    toast.success("Updated");
+    refetch();
+  };
+
+  const handleDeleteProduct = async (orderId: string) => {
+    const result = await deleteProduct(orderId);
+    console.log(result);
+    toast.success("Deleted");
+    refetch();
+  };
+
   return (
     <div className="w-max-7xl  m-10 jost-thin">
       <Table className="lg:w-[1000px] max-w-7xl mx-auto border rounded-lg">
@@ -71,7 +133,7 @@ const ManageProducts = () => {
             <TableHead>Price</TableHead>
             <TableHead>Avaiability</TableHead>
             <TableHead>Quantity</TableHead>
-            <TableHead className="text-right">Category</TableHead>
+            <TableHead className="">Category</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
@@ -81,16 +143,154 @@ const ManageProducts = () => {
               <TableCell>{product?.name}</TableCell>
               <TableCell>{product?.author}</TableCell>
               <TableCell>{product?.price}</TableCell>
-              <TableCell>{product?.availability ? "In Stock" : "Stock Out"}</TableCell>
+              <TableCell>
+                {product?.availability ? "In Stock" : "Stock Out"}
+              </TableCell>
               <TableCell>{product?.quantity}</TableCell>
               <TableCell>{product?.category}</TableCell>
               <TableCell className="text-right">
-                <div className="flex gap-2">
+                <div className="flex gap-2 justify-end">
                   <div>
-                    <Edit size="18" />
+                    <Sheet>
+                      <SheetTrigger asChild>
+                        <Button
+                          variant="outline"
+                          onClick={() => setProductInfo(product)}
+                        >
+                          <Edit size="18" />
+                        </Button>
+                      </SheetTrigger>
+                      <SheetContent>
+                        <SheetHeader>
+                          <SheetTitle>Update Order Information</SheetTitle>
+                          <SheetDescription>
+                            Make changes to order here. Click save when you're
+                            done.
+                          </SheetDescription>
+                        </SheetHeader>
+                        <div className="grid gap-4 py-4">
+                          <div className="">
+                            <BSForm form={form} onSubmit={handleUpdateProduct}>
+                              <BSInput
+                                form={form}
+                                type="text"
+                                name="name"
+                                label="Name"
+                                required={false}
+                                placeholder={product?.name}
+                                className="border-gray-400 "
+                              />
+                              <BSInput
+                                form={form}
+                                type="text"
+                                name="author"
+                                label="Author"
+                                required={false}
+                                placeholder={product?.author}
+                                className="border-gray-400 "
+                              />
+                              <BSInput
+                                form={form}
+                                type="number"
+                                name="quantity"
+                                label="Quantity"
+                                required={false}
+                                placeholder={product?.quantity?.toString()}
+                                className="border-gray-400 "
+                              />
+                              <Select
+                                onValueChange={(value) =>
+                                  form.setValue("category", value)
+                                }
+                              >
+                                <SelectTrigger className="w-[180px]">
+                                  <SelectValue placeholder="Category" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    <SelectItem value={"Fiction"}>
+                                      Fiction
+                                    </SelectItem>
+                                    <SelectItem value={"Science"}>
+                                      Science
+                                    </SelectItem>
+                                    <SelectItem value={"Poetry"}>
+                                      Poetry
+                                    </SelectItem>
+                                    <SelectItem value={"SelfDevelopment"}>
+                                      SelfDevelopment
+                                    </SelectItem>
+                                    <SelectItem value={"Religious"}>
+                                      Religious
+                                    </SelectItem>
+                                  </SelectGroup>
+                                </SelectContent>
+                              </Select>
+
+                              <BSInput
+                                form={form}
+                                type="number"
+                                name="totalPrice"
+                                label="Total Price"
+                                required={false}
+                                placeholder={product?.description}
+                                className="border-gray-400 "
+                              />
+                              <BSInput
+                                form={form}
+                                type="number"
+                                name="totalPrice"
+                                label="Total Price"
+                                required={false}
+                                placeholder={product?.imgUrl}
+                                className="border-gray-400 "
+                              />
+                              <BSInput
+                                form={form}
+                                type="number"
+                                name="price"
+                                label="Price"
+                                required={false}
+                                placeholder={product?.price?.toString()}
+                                className="border-gray-400 "
+                              />
+                              <Select
+                                onValueChange={(value) =>
+                                  form.setValue("availibility", value)
+                                }
+                              >
+                                <SelectTrigger className="w-[180px]">
+                                  <SelectValue placeholder="Availability" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    <SelectItem value={"inStock"}>
+                                      True
+                                    </SelectItem>
+                                    <SelectItem value={"stockOut"}>
+                                      False
+                                    </SelectItem>
+                                  </SelectGroup>
+                                </SelectContent>
+                              </Select>
+                              <Button type="submit" className="w-full">
+                                Update Product
+                              </Button>
+                            </BSForm>
+                          </div>
+                        </div>
+                      </SheetContent>
+                    </Sheet>
                   </div>
                   <div>
-                    <Delete size="18" />
+                    <Button
+                      variant="outline"
+                      onClick={() =>
+                        handleDeleteProduct(product?._id as string)
+                      }
+                    >
+                      <Delete size="18" />
+                    </Button>
                   </div>
                 </div>
               </TableCell>

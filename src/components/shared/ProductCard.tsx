@@ -15,7 +15,7 @@ export function ProductCard({product}:any) {
     <Card className="h-[400px] w-[98%] rounded-none">
       <CardHeader>
         <CardTitle className="flex justify-center"><img src={product?.imgUrl} alt="" className="w-full h-48 object-cover"/></CardTitle>
-        <CardDescription>{product?.name}</CardDescription>
+        <CardDescription>{product?.name?.slice(0, 20)}...</CardDescription>
       </CardHeader>
       <CardContent className="text-sm">
         <p>Author: {product?.author}</p>

@@ -8,7 +8,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/product";
 import { Loader } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
 export interface TProductDetails {
@@ -22,6 +22,7 @@ export interface TProductDetails {
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate()
   const user = useAppSelector(selectCurrentUser);
   console.log(user);
   const dispatch = useDispatch();
@@ -72,10 +73,18 @@ const ProductDetails = () => {
                 style={{ marginTop: "9px" }}
                 className=" rounded-lg py-2 px-4"
                 onClick={() => {
+                 if(user){
                   dispatch(
                     add({ userId: user?.user as string, productId: _id })
                   );
                   toast.success("Add to cart successfully");
+                 }
+                 else{
+                  toast.warning("Please Login", {duration: 3000});
+                  setTimeout(() => {
+                    navigate('/login')
+                }, 3000);
+                 }
                 }}
               >
                 Add to Cart

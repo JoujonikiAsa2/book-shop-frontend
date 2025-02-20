@@ -1,4 +1,22 @@
+import BSForm from "@/components/form/Form";
+import BSInput from "@/components/form/Input";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import {
   Table,
   TableBody,
@@ -7,22 +25,32 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetAllOrdersQuery } from "@/redux/features/orders/orderApi";
+import {
+  useDeleteAnOrderMutation,
+  useGetAllOrdersQuery,
+  useUpdateAnOrderMutation,
+} from "@/redux/features/orders/orderApi";
 import { TQueryParam } from "@/types/global";
 import { TOrder } from "@/types/order";
 import { ArrowLeft, ArrowRight, Delete, Edit, Loader } from "lucide-react";
 import { useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const ManageOrder = () => {
+  const form = useForm();
   const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
+  const [orderInfo, setOrderInfo] = useState<TOrder | undefined>(undefined);
   const queryParam: TQueryParam[] = [];
   const [currentPage, setCurrentPage] = useState<number>(1);
   const {
     data: orderData,
     isFetching,
     isLoading,
+    refetch,
   } = useGetAllOrdersQuery(params);
-  console.log(orderData);
+  const [deleteOrder] = useDeleteAnOrderMutation();
+  const [updateOrder] = useUpdateAnOrderMutation();
 
   const totalPages = orderData?.meta?.totalPage || 0;
 
@@ -60,49 +88,205 @@ const ManageOrder = () => {
       setParams(queryParam);
     }
   };
+
+  const handleUpdateOrder = async (data: FieldValues) => {
+    const orderDataInfo = {
+      _id: orderInfo?._id as string,
+      address: data?.address !== undefined ? data?.address : orderInfo?.address,
+      city: data?.city !== undefined ? data?.city : orderInfo?.city,
+      phone: data?.phone !== undefined ? data?.phone : orderInfo?.phone,
+      status: data?.status !== undefined ? data?.address : orderInfo?.status,
+      transaction: {
+        method: data?.transactionMethod !== undefined ? data?.transactionMethod : orderInfo?.transaction?.method,
+      },
+    };
+    const result = await updateOrder(orderDataInfo);
+    console.log(result);
+    toast.success("Updated");
+    refetch();
+  };
+
+  const handleDeleteOrder = async (orderId: string) => {
+    const result = await deleteOrder(orderId);
+    console.log(result);
+    toast.success("Deleted");
+    refetch();
+  };
   return (
     <div className="w-max-7xl  m-10 jost-thin">
-      <Table className="lg:w-[1000px] max-w-7xl mx-auto border rounded-lg">
+      <Table className="w-fit max-w-7xl mx-auto border rounded-lg">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Order ID</TableHead>
             <TableHead>Transaction ID</TableHead>
+            <TableHead>Full Address</TableHead>
+            <TableHead>Phone</TableHead>
             <TableHead>Payment Status</TableHead>
+            <TableHead>Payment Method</TableHead>
+            <TableHead className="text-right">Product Quantity</TableHead>
             <TableHead className="text-right">Total Price</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {orderData?.data?.map((order: TOrder) => (
-            <TableRow key={order?._id}>
-              <TableCell>{order?._id}</TableCell>
-              <TableCell>{order?.transaction?.id}</TableCell>
-              <TableCell>
-                <div
-                  className={`p-1 rounded ${
-                    (order?.status === "Pending" && `bg-yellow-300 w-fit`) ||
-                    (order?.status === "Paid" && `bg-blue-300 w-fit`) ||
-                    (order?.status === "Cancelled" && `bg-red-300 w-fit`)
-                  }`}
-                >
-                  {order?.status}
-                </div>
-              </TableCell>
-              <TableCell className="text-right">
-                {order?.totalPrice && order?.totalPrice + " Taka"}
-              </TableCell>
-              <TableCell className="text-right">
-                <div className="flex gap-2">
-                  <div>
-                    <Edit size="18" />
+          {orderData?.data?.map((order: TOrder) => {
+            const totalQuantity =
+              order?.products?.reduce(
+                (total, product) => total + product.quantity,
+                0
+              ) || 0;
+
+            return (
+              <TableRow key={order?._id}>
+                <TableCell>{order?._id}</TableCell>
+                <TableCell>{order?.transaction?.id}</TableCell>
+                <TableCell>{order?.address + " " + order?.city}</TableCell>
+                <TableCell>{order?.phone}</TableCell>
+                <TableCell>
+                  <div
+                    className={`p-1 rounded ${
+                      (order?.status === "Pending" && `bg-yellow-300 w-fit`) ||
+                      (order?.status === "Paid" && `bg-blue-300 w-fit`) ||
+                      (order?.status === "Cancelled" && `bg-red-300 w-fit`)
+                    }`}
+                  >
+                    {order?.status}
                   </div>
-                  <div>
-                    <Delete size="18" />
+                </TableCell>
+                <TableCell>{order?.transaction?.method}</TableCell>
+                <TableCell>{totalQuantity}</TableCell>
+                <TableCell className="text-right">
+                  {order?.totalPrice && order?.totalPrice + " Taka"}
+                </TableCell>
+                <TableCell className="text-right">
+                  <div className="flex gap-2 justify-end">
+                    <div>
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <Button
+                            variant="outline"
+                            onClick={() => setOrderInfo(order)}
+                          >
+                            <Edit size="18" />
+                          </Button>
+                        </SheetTrigger>
+                        <SheetContent>
+                          <SheetHeader>
+                            <SheetTitle>Update Order Information</SheetTitle>
+                            <SheetDescription>
+                              Make changes to order here. Click save when you're
+                              done.
+                            </SheetDescription>
+                          </SheetHeader>
+                          <div className="grid gap-4 py-4">
+                            <div className="">
+                              <BSForm form={form} onSubmit={handleUpdateOrder}>
+                                <BSInput
+                                  form={form}
+                                  type="text"
+                                  name="address"
+                                  label="Address"
+                                  required={false}
+                                  placeholder={order?.address}
+                                  className="border-gray-400 "
+                                />
+                                <BSInput
+                                  form={form}
+                                  type="text"
+                                  name="city"
+                                  label="City"
+                                  required={false}
+                                  placeholder={order?.city}
+                                  className="border-gray-400 "
+                                />
+                                <BSInput
+                                  form={form}
+                                  type="text"
+                                  name="phone"
+                                  label="Phone"
+                                  required={false}
+                                  placeholder={order?.phone}
+                                  className="border-gray-400 "
+                                />
+                                <Select
+                                  onValueChange={(value) =>
+                                    form.setValue("transactionMethod", value)
+                                  }
+                                >
+                                  <SelectTrigger className="w-full">
+                                    <SelectValue
+                                      placeholder={order?.transaction?.method}
+                                    />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectGroup>
+                                      <SelectItem value={"iBanking"}>
+                                        iBanking
+                                      </SelectItem>
+                                      <SelectItem value={"Nagad"}>
+                                        Nagad
+                                      </SelectItem>
+                                      <SelectItem value={"Cards"}>
+                                        Cards
+                                      </SelectItem>
+                                    </SelectGroup>
+                                  </SelectContent>
+                                </Select>
+                                <Select
+                                  onValueChange={(value) =>
+                                    form.setValue("transactionStatus", value)
+                                  }
+                                >
+                                  <SelectTrigger className="w-full">
+                                    <SelectValue placeholder={order?.status} />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectGroup>
+                                      <SelectItem value={"Paid"}>
+                                        Paid
+                                      </SelectItem>
+                                      <SelectItem value={"Pending"}>
+                                        Pending
+                                      </SelectItem>
+                                      <SelectItem value={"Cancelled"}>
+                                        Cancelled
+                                      </SelectItem>
+                                    </SelectGroup>
+                                  </SelectContent>
+                                </Select>
+
+                                <BSInput
+                                  form={form}
+                                  type="number"
+                                  name="totalPrice"
+                                  label="Total Price"
+                                  required={false}
+                                  placeholder={order?.totalPrice.toString()}
+                                  className="border-gray-400 "
+                                />
+                                <Button type="submit" className="w-full">
+                                  Update Order
+                                </Button>
+                              </BSForm>
+                            </div>
+                          </div>
+                        </SheetContent>
+                      </Sheet>
+                    </div>
+                    <div>
+                      <Button variant="outline">
+                        <Delete
+                          size="18"
+                          onClick={() => handleDeleteOrder(order?._id)}
+                        />
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
+                </TableCell>
+              </TableRow>
+            );
+          })}
+
           <TableRow></TableRow>
         </TableBody>
       </Table>

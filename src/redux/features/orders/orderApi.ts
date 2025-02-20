@@ -47,6 +47,19 @@ const orderApi = baseApi.injectEndpoints({
         params: { order_id: orderId },
       }),
     }),
+    deleteAnOrder: builder.mutation({
+      query: (orderId: string) => ({
+        url: `/orders/${orderId}`,
+        method: "DELETE",
+      }),
+    }), 
+    updateAnOrder: builder.mutation({
+      query: (orderInfo: Record<string, unknown>) => ({
+        url: `/orders/${orderInfo?._id}`,
+        method: "PATCH",
+        body: orderInfo,
+      }),
+    }),
   }),
 });
 
@@ -55,4 +68,7 @@ export const {
   useCreateAnOrderMutation,
   useVerifyPaymentQuery,
   useGetAllOrdersQuery,
+  useDeleteAnOrderMutation,
+  useUpdateAnOrderMutation
+  
 } = orderApi;

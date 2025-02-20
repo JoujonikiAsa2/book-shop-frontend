@@ -4,12 +4,12 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { add, remove } from "@/redux/features/orders/cartSlice";
 import { useGetProductsQuery } from "@/redux/features/products/productApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { Loader, MinusCircle, PlusCircle } from "lucide-react";
+import { Loader, Minus, MinusCircle, Plus, PlusCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectCurrentUser)
+  const user = useAppSelector(selectCurrentUser);
   const {
     data: allProducts,
     isFetching,
@@ -41,7 +41,7 @@ const Cart = () => {
         {products?.map((product, index) => (
           <div
             className="w-full border p-6 flex flex-col gap-2 md:flex-row justify-between"
-            key={product?._id}
+            key={index}
           >
             <div className=" flex gap-6 w-[320px] items-center">
               <img src={product?.imgUrl} className="size-20" />
@@ -51,9 +51,29 @@ const Cart = () => {
               <p>৳ {product?.price * productsCart[index].quantity}</p>
             </div>
             <div className=" flex gap-3 items-center justify-end">
-              <PlusCircle onClick={() => dispatch(add({ userId: user?.user as string, productId: product?._id }))} />
+              <Plus
+                className="cursor-pointer"
+                onClick={() =>
+                  dispatch(
+                    add({
+                      userId: user?.user as string,
+                      productId: product?._id,
+                    })
+                  )
+                }
+              />
               {productsCart[index].quantity}
-              <MinusCircle onClick={() => dispatch(remove({ userId: user?.user as string, productId: product?._id }))} />
+              <Minus
+                className="cursor-pointer"
+                onClick={() =>
+                  dispatch(
+                    remove({
+                      userId: user?.user as string,
+                      productId: product?._id,
+                    })
+                  )
+                }
+              />
             </div>
           </div>
         ))}

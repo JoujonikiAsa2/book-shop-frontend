@@ -164,7 +164,7 @@ const ManageProducts = () => {
                         <SheetHeader>
                           <SheetTitle>Update Order Information</SheetTitle>
                           <SheetDescription>
-                            Make changes to order here. Click save when you're
+                            Make changes to product here. Click save when you're
                             done.
                           </SheetDescription>
                         </SheetHeader>
@@ -226,25 +226,6 @@ const ManageProducts = () => {
                                   </SelectGroup>
                                 </SelectContent>
                               </Select>
-
-                              <BSInput
-                                form={form}
-                                type="number"
-                                name="totalPrice"
-                                label="Total Price"
-                                required={false}
-                                placeholder={product?.description}
-                                className="border-gray-400 "
-                              />
-                              <BSInput
-                                form={form}
-                                type="number"
-                                name="totalPrice"
-                                label="Total Price"
-                                required={false}
-                                placeholder={product?.imgUrl}
-                                className="border-gray-400 "
-                              />
                               <BSInput
                                 form={form}
                                 type="number"

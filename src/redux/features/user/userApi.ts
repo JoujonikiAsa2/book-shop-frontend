@@ -21,7 +21,13 @@ const userApi = baseApi.injectEndpoints({
         body: data
       }),
     }),
+    deleteUser: builder.mutation({
+      query: (userId:string) => ({
+        url: `/users/${userId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetMeQuery, useGetAllUsersQuery, useUpdateProfileMutation } = userApi;
+export const { useGetMeQuery, useGetAllUsersQuery, useUpdateProfileMutation, useDeleteUserMutation } = userApi;

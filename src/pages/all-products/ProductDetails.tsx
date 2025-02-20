@@ -7,6 +7,7 @@ import { useGetProductDetailsQuery } from "@/redux/features/products/productApi"
 import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/product";
 import { Loader } from "lucide-react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
@@ -22,14 +23,15 @@ export interface TProductDetails {
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const user = useAppSelector(selectCurrentUser);
   console.log(user);
   const dispatch = useDispatch();
   const { data, isLoading, isFetching } = useGetProductDetailsQuery(
     id as string
   );
-
+  const cartProducts = useAppSelector((state) => state.cart.products);
+  const [disable, setDisable] = useState<boolean>(false);
   if (isFetching || isLoading) {
     return (
       <div className="h-[80vh] w-full flex items-center justify-center">
@@ -37,8 +39,20 @@ const ProductDetails = () => {
       </div>
     );
   }
-  const { _id, imgUrl, name, description, category, price, author }: TProduct =
-    data?.data;
+  const {
+    _id,
+    imgUrl,
+    name,
+    description,
+    quantity,
+    category,
+    price,
+    author,
+  }: TProduct = data?.data;
+
+  const productQuantity = cartProducts?.filter(
+    (product) => product.product == _id
+  );
 
   return (
     <div className="bg-gray-100 h-[100vh] flex items-center">
@@ -71,20 +85,23 @@ const ProductDetails = () => {
               <Button
                 variant="outline"
                 style={{ marginTop: "9px" }}
+                disabled={disable}
                 className=" rounded-lg py-2 px-4"
                 onClick={() => {
-                 if(user){
-                  dispatch(
-                    add({ userId: user?.user as string, productId: _id })
-                  );
-                  toast.success("Add to cart successfully");
-                 }
-                 else{
-                  toast.warning("Please Login", {duration: 3000});
-                  setTimeout(() => {
-                    navigate('/login')
-                }, 3000);
-                 }
+                  if (user && productQuantity[0]?.quantity !== quantity) {
+                    dispatch(
+                      add({ userId: user?.user as string, productId: _id })
+                    );
+                    toast.success("Add to cart successfully");
+                  } else if (productQuantity[0]?.quantity === quantity) {
+                    toast.warning("Insufficient Stock");
+                    setDisable(true);
+                  } else {
+                    toast.warning("Please Login", { duration: 3000 });
+                    setTimeout(() => {
+                      navigate("/login");
+                    }, 3000);
+                  }
                 }}
               >
                 Add to Cart

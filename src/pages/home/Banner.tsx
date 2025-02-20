@@ -15,7 +15,7 @@ function Banner() {
           </p>
           <Button>See More</Button>
         </div>
-        <div className="">
+        <div className="p-10 lg:p-0">
           <img src={books} alt="" />
         </div>
       </div>

@@ -55,7 +55,7 @@ const Testimonial = () => {
         >
           {[1, 2, 3, 4, 5].map((_, index) => (
             <Card
-              className="h-[370px] md:w-[300px] mx-[5px] rounded-none"
+              className="h-[400px] md:w-[260px] mx-[5px] rounded-none"
               key={index}
             >
               <CardTitle className="p-6 flex justify-between">

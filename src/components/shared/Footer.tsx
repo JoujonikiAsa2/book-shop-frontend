@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-black text-white">
-      <div className=" flex justify-between mx-[5%] py-10">
+      <div className=" flex flex-col md:flex-row justify-between mx-[5%] py-10">
         <aside className="flex flex-col">
           <p>
             <span className="text-xl font-medium">InkSpire</span>

@@ -58,7 +58,7 @@ const Header = () => {
             </PopoverContent>
               {
                 user && <div className="flex items-center gap-2 border border-red-400 px-2 rounded-full" onClick={() => dispatch(logout())}>
-                <span className="text-red-400">Logout</span>
+                <span className="text-red-400 hover:cursor-pointer">Logout</span>
                 </div>
               }
           </Popover>

@@ -125,9 +125,9 @@ const ManageProducts = () => {
 
   return (
     <>
-    {totalPages>=1 ? <div className="w-fit lg:w-[80rem] m-10 poppins-regular">
-      <div className="w-full h-[65vh]">
-      <Table className="w-full border rounded-lg overflow-scroll bg-[#F3F3F3]" >
+    {totalPages>=1 ? <div className="w-fit lg:w-[40rem] m-10 poppins-regular">
+      <div className="w-[300px] lg:w-[1000px] h-[65vh] overflow-x-scroll">
+      <Table className="border rounded-lg bg-[#F3F3F3]">
         <TableHeader  className="bg-[#1B4D3E]">
           <TableRow>
             <TableHead className="text-white">Product Name</TableHead>

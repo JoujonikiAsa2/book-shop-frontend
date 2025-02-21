@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import CardSkeleton from "@/components/shared/CardSkeleton";
 import CustomBanner from "@/components/shared/CustomBanner";
 import { ProductCard } from "@/components/shared/ProductCard";

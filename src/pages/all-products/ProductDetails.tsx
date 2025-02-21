@@ -61,7 +61,7 @@ const ProductDetails = () => {
 
   return (
     <div className="flex items-center">
-      <div className="lg:w-9/12 lg:h-[70vh] mx-auto  flex flex-col md:flex-row gap-10 bg-white p-4 lg:p-8">
+      <div className="lg:w-9/12  mx-auto  flex flex-col md:flex-row gap-10 bg-white p-4 lg:p-8">
         <div className="w-full lg:w-1/3">
           <img
             src={imgUrl}

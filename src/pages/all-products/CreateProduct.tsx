@@ -56,8 +56,8 @@ const CreateProduct = () => {
     }
   };
   return (
-    <div className="w-full min- min-h-[80vh] flex justify-center items-center p-16">
-      <div className="w-[400px] bg-white p-12">
+    <div className="w-full min- min-h-[80vh] flex justify-center items-center px-16">
+      <div className="lg:w-[400px] bg-white p-12">
         <BSForm form={form} onSubmit={handleOrder}>
           <BSInput
             form={form}

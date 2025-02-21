@@ -32,12 +32,13 @@ const Orders = () => {
     </div>;
   }
   return (
-    <div className="w-fit lg:w-[80rem] m-10 poppins-regular">
-      <div className="w-full h-[65vh] ">
-        <Table className="w-full border rounded-lg bg-[#F3F3F3]">
+    <div className="w-fit lg:w-[40rem] m-10 poppins-regular">
+      <div className="w-[300px] lg:w-[1000px] h-[65vh] overflow-x-scroll">
+        <Table className="border rounded-lg bg-[#F3F3F3]">
           <TableCaption>A list of your recent invoices.</TableCaption>
           <TableHeader className="bg-[#1B4D3E]">
             <TableRow>
+              <TableHead className="w-[100px] text-white">Phone</TableHead>
               <TableHead className="w-[100px] text-white">Order ID</TableHead>
               <TableHead className="text-white">Transaction ID</TableHead>
               <TableHead className="text-white">Payment Status</TableHead>
@@ -46,9 +47,10 @@ const Orders = () => {
           </TableHeader>
           <TableBody>
             {orderData?.data?.map((order: TOrder) => (
-              <TableRow key={order._id}>
-                <TableCell>{order._id}</TableCell>
-                <TableCell>{order.transaction.id}</TableCell>
+              <TableRow key={order?._id}>
+                <TableCell className="text-wrap">{order?.phone}</TableCell>
+                <TableCell className="text-wrap">{order?._id}</TableCell>
+                <TableCell>{order?.transaction?.id}</TableCell>
                 <TableCell>
                   <div
                     className={`p-1 rounded ${
@@ -57,11 +59,11 @@ const Orders = () => {
                       (order?.status === "Cancelled" && `bg-red-300 w-fit`)
                     }`}
                   >
-                    {order.status}
+                    {order?.status}
                   </div>
                 </TableCell>
                 <TableCell className="text-right">
-                  {order.totalPrice && order.totalPrice + " Taka"}
+                  {order?.totalPrice && "৳" + order?.totalPrice }
                 </TableCell>
               </TableRow>
             ))}

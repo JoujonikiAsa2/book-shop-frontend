@@ -28,9 +28,9 @@ const PaymentsDetails = () => {
     );
   }
   return (
-    <div className="w-fit lg:w-[80rem] m-10 poppins-regular">
-          <div className="w-full h-[65vh] ">
-      <Table className="w-full border rounded-lg bg-[#F3F3F3]">
+    <div className="w-fit lg:w-[40rem] m-10 poppins-regular">
+          <div className="w-[300px] lg:w-[1000px] h-[65vh] overflow-x-scroll">
+      <Table className="border rounded-lg bg-[#F3F3F3]">
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader className="bg-[#1B4D3E]">
           <TableRow>
@@ -50,7 +50,7 @@ const PaymentsDetails = () => {
               <TableCell>{order?.transaction?.bank_status}</TableCell>
               <TableCell>{order?.transaction?.method}</TableCell>
               <TableCell className="text-right">
-                {order?.totalPrice} Taka
+                {"৳" + order?.totalPrice}
               </TableCell>
               <TableCell className="text-right">
                 <Button

@@ -99,7 +99,7 @@ const Navbar = () => {
           )}
           {user?.role == "admin" && (
             <NavLink
-              to={`/dashboard/admin/manage-orders`}
+              to={`/dashboard/admin/create-products`}
               className={({ isActive }) =>
                 isActive ? "menu-item active" : "menu-item"
               }
@@ -152,7 +152,7 @@ const Navbar = () => {
                   {user?.role === "admin" && (
                     <>
                       <NavLink
-                        to={`/dashboard/admin/manage-orders`}
+                        to={`/dashboard/admin/create-products`}
                         className={({ isActive }) =>
                           isActive ? "menu-item active" : "menu-item"
                         }

@@ -89,15 +89,19 @@ const AllProducts = () => {
                 name="search"
                 placeholder="Search by name, author, category"
                 form={form}
-                className="w-72 "
+                className="w-64 lg:w-72 "
               ></BSInput>
-              <Button className="bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80" type="submit" style={{ marginTop: "9px" }}>
+              <Button
+                className="bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80"
+                type="submit"
+                style={{ marginTop: "9px" }}
+              >
                 Search
               </Button>
             </div>
           </BSForm>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap-reverse justify-center gap-2">
           <Button
             variant={"outline"}
             style={{ marginTop: "9px" }}
@@ -125,7 +129,11 @@ const AllProducts = () => {
                 form={form}
                 className="w-32 "
               ></BSInput>
-              <Button className="bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80" type="submit" style={{ marginTop: "9px" }}>
+              <Button
+                className="bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80"
+                type="submit"
+                style={{ marginTop: "9px" }}
+              >
                 Filter
               </Button>
             </div>

@@ -63,7 +63,7 @@ const Contact = () => {
               form={form}
               required={true}
             />
-            <Button type="submit" className="w-full">
+            <Button className="bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80 w-full" type="submit">
               Submit <Send></Send>
             </Button>
           </BSForm>

@@ -7,7 +7,6 @@ import { TProduct } from "@/types/product";
 import image from "../../assets/products.jpg";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import BSForm from "@/components/form/Form";
 import BSInput from "@/components/form/Input";
 import { FieldValues, useForm } from "react-hook-form";
@@ -92,20 +91,24 @@ const AllProducts = () => {
                 form={form}
                 className="w-72 "
               ></BSInput>
-              <Button type="submit" style={{ marginTop: "9px" }}>
+              <Button className="bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80" type="submit" style={{ marginTop: "9px" }}>
                 Search
               </Button>
             </div>
           </BSForm>
         </div>
         <div className="flex gap-2">
-        <Button variant={"outline"} style={{ marginTop: "9px" }} onClick={()=>{
-          queryParam.push({ name: "availability", value: "true" });
-          setParams(queryParam);
-          refetch();
-        }}>
-                In Stock
-              </Button>
+          <Button
+            variant={"outline"}
+            style={{ marginTop: "9px" }}
+            onClick={() => {
+              queryParam.push({ name: "availability", value: "true" });
+              setParams(queryParam);
+              refetch();
+            }}
+          >
+            In Stock
+          </Button>
           <BSForm form={form} onSubmit={handleFilter}>
             <div className="flex gap-2 items-center">
               <BSInput
@@ -122,7 +125,7 @@ const AllProducts = () => {
                 form={form}
                 className="w-32 "
               ></BSInput>
-              <Button type="submit" style={{ marginTop: "9px" }}>
+              <Button className="bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80" type="submit" style={{ marginTop: "9px" }}>
                 Filter
               </Button>
             </div>
@@ -130,19 +133,19 @@ const AllProducts = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4 m-6">
-        {productData?.data?.map((item: TProduct) => (
-          <ProductCard key={item._id} product={item} />
-        ))}
-        {isLoading ||
-          (isFetching && (
-            <>
-              {Array.from({ length: 12 }, (_, i) => i + 1).map(
-                (item: number) => (
-                  <CardSkeleton key={item} />
-                )
-              )}
-            </>
-          ))}
+        {isLoading || isFetching ? (
+          <>
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((item: number) => (
+              <CardSkeleton key={item} />
+            ))}
+          </>
+        ) : (
+          <>
+            {productData?.data?.map((item: TProduct) => (
+              <ProductCard key={item._id} product={item} />
+            ))}
+          </>
+        )}
       </div>
 
       <div className="flex justify-center items-center gap-2 pb-4 py-4">
@@ -164,6 +167,11 @@ const AllProducts = () => {
                   setParams(queryParam);
                   setCurrentPage(item);
                 }}
+                className={`${
+                  currentPage === item
+                    ? "bg-[#003C3C] text-white"
+                    : "text-primary"
+                }`}
               >
                 {item}
               </Button>
@@ -175,18 +183,7 @@ const AllProducts = () => {
           </Button>
         </div>
       </div>
-        <div>
-          <Input
-            type="number"
-            placeholder="page"
-            className="w-40"
-            onChange={(e) => {
-              queryParam.push({ name: "page", value: e.target.value });
-              setParams(queryParam);
-            }}
-          />
-        </div>
-      </div>
+    </div>
   );
 };
 

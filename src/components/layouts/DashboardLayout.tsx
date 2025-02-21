@@ -7,9 +7,9 @@ const DashboardLayout = () => {
   return (
     <ProtectedRoute>
       <SidebarProvider>
-        <DashboardSidebar />
+        <DashboardSidebar/>
         <main>
-          <SidebarTrigger className="w-12" />
+          <SidebarTrigger className="w-12 ml-2" />
           <Outlet />
         </main>
       </SidebarProvider>

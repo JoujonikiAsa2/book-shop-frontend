@@ -87,7 +87,7 @@ const UpdatePassword = () => {
             required={true}
             className="border-gray-400 w-[300px]"
           />
-          <Button type="submit" className="w-full">
+          <Button  type="submit" className="w-full bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80">
             Confirm
           </Button>
         </BSForm>

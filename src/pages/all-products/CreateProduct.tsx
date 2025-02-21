@@ -92,7 +92,7 @@ const CreateProduct = () => {
             className="border-gray-400 "
           />
           <Select onValueChange={(value) => form.setValue("category", value)}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Category" />
             </SelectTrigger>
             <SelectContent>
@@ -123,8 +123,8 @@ const CreateProduct = () => {
             required={true}
             className="border-gray-400 "
           />
-          <Select>
-            <SelectTrigger className="w-[180px]">
+          <Select onValueChange={(value) => form.setValue("availability", value)}>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Availability" />
             </SelectTrigger>
             <SelectContent>
@@ -134,7 +134,7 @@ const CreateProduct = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <Button type="submit">Create Product</Button>
+          <Button className="w-full bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80" type="submit">Create Product</Button>
         </BSForm>
       </div>
     </div>

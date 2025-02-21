@@ -159,7 +159,7 @@ const ProceedCheckout = () => {
         <p>Subtotal ({totalProducts} items)</p>
         <p>৳ {totalPrice}</p>
       </div>
-      <Button type="submit" className="w-full mt-4">
+      <Button type="submit" className="bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80 w-full mt-4">
       Order Now
       </Button>
     </BSForm>

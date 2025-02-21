@@ -36,19 +36,17 @@ const Featured = () => {
           </div>
         ) : (
           <Carousel
-            // arrows
             autoPlaySpeed={3000}
             className="w-full h-full mx-[5px]"
             draggable={true}
-            infinite={false}
+            autoPlay={true}
+            infinite={true}
             responsive={{
               superLargeDesktopp: {
-                // the naming can be any, depends on you.
                 breakpoint: { max: 4000, min: 1400 },
                 items: 5,
               },
               superSmallMobile: {
-                // the naming can be any, depends on you.
                 breakpoint: { max: 550, min: 0 },
                 items: 1,
               },
@@ -88,7 +86,7 @@ const Featured = () => {
         )}
       </div>
       <div className="py-4 flex justify-center">
-        <Link to="all-products"><Button>See More <GoArrowUpRight size={20}/></Button></Link>
+        <Link to="all-products"><Button variant="outline" className="hover:bg-[#E07A5F] hover:text-white">See More <GoArrowUpRight size={20}/></Button></Link>
       </div>
     </div>
   );

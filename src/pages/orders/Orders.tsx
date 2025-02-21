@@ -32,41 +32,43 @@ const Orders = () => {
     </div>;
   }
   return (
-    <div className="w-max-7xl  m-10 jost-thin">
-      <Table className="lg:w-[1000px] max-w-7xl mx-auto border rounded-lg">
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Order ID</TableHead>
-            <TableHead>Transaction ID</TableHead>
-            <TableHead>Payment Status</TableHead>
-            <TableHead className="text-right">Total Price</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {orderData?.data?.map((order: TOrder) => (
-            <TableRow key={order._id}>
-              <TableCell>{order._id}</TableCell>
-              <TableCell>{order.transaction.id}</TableCell>
-              <TableCell>
-                <div
-                  className={`p-1 rounded ${
-                    (order?.status === "Pending" && `bg-yellow-300 w-fit`) ||
-                    (order?.status === "Paid" && `bg-blue-300 w-fit`) ||
-                    (order?.status === "Cancelled" && `bg-red-300 w-fit`)
-                  }`}
-                >
-                  {order.status}
-                </div>
-              </TableCell>
-              <TableCell className="text-right">
-                {order.totalPrice && order.totalPrice + " Taka"}
-              </TableCell>
+    <div className="w-fit lg:w-[80rem] m-10 poppins-regular">
+      <div className="w-full h-[65vh] ">
+        <Table className="w-full border rounded-lg bg-[#F3F3F3]">
+          <TableCaption>A list of your recent invoices.</TableCaption>
+          <TableHeader className="bg-[#1B4D3E]">
+            <TableRow>
+              <TableHead className="w-[100px] text-white">Order ID</TableHead>
+              <TableHead className="text-white">Transaction ID</TableHead>
+              <TableHead className="text-white">Payment Status</TableHead>
+              <TableHead className="text-right text-white">Total Price</TableHead>
             </TableRow>
-          ))}
-          <TableRow></TableRow>
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {orderData?.data?.map((order: TOrder) => (
+              <TableRow key={order._id}>
+                <TableCell>{order._id}</TableCell>
+                <TableCell>{order.transaction.id}</TableCell>
+                <TableCell>
+                  <div
+                    className={`p-1 rounded ${
+                      (order?.status === "Pending" && `bg-yellow-300 w-fit`) ||
+                      (order?.status === "Paid" && `bg-blue-300 w-fit`) ||
+                      (order?.status === "Cancelled" && `bg-red-300 w-fit`)
+                    }`}
+                  >
+                    {order.status}
+                  </div>
+                </TableCell>
+                <TableCell className="text-right">
+                  {order.totalPrice && order.totalPrice + " Taka"}
+                </TableCell>
+              </TableRow>
+            ))}
+            <TableRow></TableRow>
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

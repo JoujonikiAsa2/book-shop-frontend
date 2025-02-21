@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.jpg";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { LogOutIcon, Menu, ShoppingCartIcon, User } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -77,12 +77,12 @@ const Navbar = () => {
     <div className="py-8 border-b">
       <div className="flex justify-between items-center mx-[5%]">
         <Link to="/">
-          <div className="flex gap-4 justify-center items-center">
-            <img src={logo} />
-            <p className="jost-semibold text-xl">InkSpire</p>
+          <div className="flex gap-2 justify-center items-center">
+            <img src={logo}  className="size-12"/>
+            <p className="poppins-semibold text-xl text-[#E07A5F]">InkSpire</p>
           </div>
         </Link>
-        <div className="hidden md:hidden lg:flex justify-end items-center gap-6">
+        <div className="hidden md:hidden lg:flex justify-end items-center gap-6 poppins-regular">
           {items.map((item) => (
             <div key={item.key}>{item.label}</div>
           ))}
@@ -122,7 +122,7 @@ const Navbar = () => {
                 <Menu />
               </SheetTrigger>
               <SheetContent>
-                <div className="flex flex-col gap-8 mt-12">
+                <div className="flex flex-col gap-8 mt-12 poppins-regular">
                   {items.map((item) => (
                     <div key={item.key}>{item.label}</div>
                   ))}
@@ -185,7 +185,7 @@ const Navbar = () => {
                   )}
                 </div>
               </PopoverTrigger>
-              <PopoverContent className="w-80 space-y-4 font-semibold">
+              <PopoverContent className="w-80 space-y-4 p-4 poppins-semibold">
                 {user?.role == "user" && (
                   <li style={{ listStyle: "none" }}>
                     {currentData?.data?.name}

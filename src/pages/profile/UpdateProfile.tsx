@@ -68,13 +68,13 @@ const UpdateProfile = () => {
             placeholder={userData?.data?.phone}
             className="border-gray-400 w-[300px]"
           />
-          <Button type="submit" className="w-full">
+          <Button className="bg-[#E07A5F] text-white hover:bg-[#E07A5F]/80 w-full" type="submit">
             Update
           </Button>
         </BSForm>
       </div>
-      <div className=" poppins-regular pb-2">
-        <p className="font-medium">Others Information</p>
+      <div className=" pb-2">
+        <p className="poppins-regular">Others Information</p>
         <p className="w-[280px] p-1 border text-sm">Email: {userData?.data?.email}</p>
         <p className="w-[280px] p-1 border text-sm">Role: {userData?.data?.role}</p>
         <p className="w-[280px] p-1 border text-sm">{user?.isDeactivate ? "Deactivate" : "Not Deactivate"}</p>

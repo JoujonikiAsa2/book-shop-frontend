@@ -125,17 +125,18 @@ const ManageProducts = () => {
 
   return (
     <>
-    {totalPages>=1 ? <div className="w-fit lg:w-[80rem] m-10 jost-thin">
-      <Table className="w-full border rounded-lg">
-        <TableHeader>
+    {totalPages>=1 ? <div className="w-fit lg:w-[80rem] m-10 poppins-regular">
+      <div className="w-full h-[65vh]">
+      <Table className="w-full border rounded-lg overflow-scroll bg-[#F3F3F3]" >
+        <TableHeader  className="bg-[#1B4D3E]">
           <TableRow>
-            <TableHead className="">Product Name</TableHead>
-            <TableHead>Author</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Avaiability</TableHead>
-            <TableHead>Quantity</TableHead>
-            <TableHead className="">Category</TableHead>
-            <TableHead className="text-right">Action</TableHead>
+            <TableHead className="text-white">Product Name</TableHead>
+            <TableHead className="text-white">Author</TableHead>
+            <TableHead className="text-white">Price</TableHead>
+            <TableHead className="text-white">Avaiability</TableHead>
+            <TableHead className="text-white">Quantity</TableHead>
+            <TableHead className="text-white">Category</TableHead>
+            <TableHead className="text-right text-white">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -155,6 +156,7 @@ const ManageProducts = () => {
                     <Sheet>
                       <SheetTrigger asChild>
                         <Button
+                        className="bg-[#426CBE] text-white  hover:bg-[#b2c2e2] "
                           variant="outline"
                           onClick={() => setProductInfo(product)}
                         >
@@ -255,7 +257,7 @@ const ManageProducts = () => {
                                   </SelectGroup>
                                 </SelectContent>
                               </Select>
-                              <Button type="submit" className="w-full">
+                              <Button type="submit" className="w-full bg-[#E07A5F]">
                                 Update Product
                               </Button>
                             </BSForm>
@@ -266,6 +268,7 @@ const ManageProducts = () => {
                   </div>
                   <div>
                     <Button
+                    className="bg-red-400 text-white hover:bg-red-200"
                       variant="outline"
                       onClick={() =>
                         handleDeleteProduct(product?._id as string)
@@ -281,6 +284,7 @@ const ManageProducts = () => {
           <TableRow></TableRow>
         </TableBody>
       </Table>
+      </div>
       <div className="flex justify-center items-center gap-2 pb-4 py-4">
         <div>
           <Button size={"sm"} variant={"outline"} onClick={handlePrev}>
@@ -300,6 +304,11 @@ const ManageProducts = () => {
                   setParams(queryParam);
                   setCurrentPage(item);
                 }}
+                className={`${
+                  currentPage === item
+                    ? "bg-[#1B4D3E] text-white"
+                    : "text-primary"
+                }`}
               >
                 {item}
               </Button>

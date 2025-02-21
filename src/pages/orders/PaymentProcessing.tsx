@@ -33,8 +33,8 @@ const PaymentProcessing = () => {
     );
   } else {
     return (
-      <div className="w-full text center">
-        <div className="bg-red-500 w-72 h-32 text-xl font-bold uppercase">
+      <div className="w-full h-[80vh] flex items-center justify-center">
+        <div className="bg-[#E07A5F] w-72 h-32 text-xl font-bold uppercase text-white flex items-center justify-center">
           Failed to payment
         </div>
       </div>

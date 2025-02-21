@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white">
-      <div className=" flex flex-col md:flex-row justify-between mx-[5%] py-10">
+    <footer className="bg-[#003C3C] text-white z-10">
+      <div className=" flex flex-col md:flex-row gap-6 justify-between mx-[5%] py-10">
         <aside className="flex flex-col">
           <p>
             <span className="text-xl font-medium">InkSpire</span>
@@ -22,7 +22,7 @@ const Footer = () => {
         </nav>
         <nav className="flex flex-col">
           <h6 className="footer-title">Contact</h6>
-          <a href="tel:+0123456789" className="link link-hover">Phone: + 0123 456 789</a>
+          <a href="tel:+0123456789" className="link link-hover ">Phone: + 0123 456 789</a>
           <a href= "mailto:inkspire@email.com">inkspire@email.com</a>
         </nav>
         <nav className="flex flex-col">

@@ -113,18 +113,19 @@ const ManageUsers = () => {
   }
 
   return (
-    <div className="w-fit lg:w-[80rem]  m-10 jost-thin">
-      <Table className="w-full mx-auto border rounded-lg overflow-x-scroll">
-        <TableHeader>
+    <div className="w-fit lg:w-[80rem]  m-10 poppins-regular">
+      <div className="w-full h-[65vh] ">
+      <Table className="w-full h-full border rounded-lg overflow-x-scroll bg-[#F3F3F3]">
+        <TableHeader className="bg-[#1B4D3E]">
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Phone</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Deactivated</TableHead>
-            <TableHead>Blocked</TableHead>
-            <TableHead>Deleted</TableHead>
-            <TableHead>Action</TableHead>
+            <TableHead className="text-white">Name</TableHead>
+            <TableHead className="text-white">Email</TableHead>
+            <TableHead className="text-white">Phone</TableHead>
+            <TableHead className="text-white">Role</TableHead>
+            <TableHead className="text-white">Deactivated</TableHead>
+            <TableHead className="text-white">Blocked</TableHead>
+            <TableHead className="text-white">Deleted</TableHead>
+            <TableHead className="text-white">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -143,6 +144,7 @@ const ManageUsers = () => {
                     <Sheet>
                       <SheetTrigger asChild>
                         <Button
+                        className="bg-[#426CBE] text-white  hover:bg-[#b2c2e2] "
                           variant="outline"
                           onClick={()=> setUserInfo(user)}
                         >
@@ -274,6 +276,7 @@ const ManageUsers = () => {
                   </div>
                   <div>
                     <Button
+                    className="bg-red-400 text-white hover:bg-red-200"
                       variant="outline"
                       onClick={() =>
                         handleDeleteProduct(user?._id as string)
@@ -289,6 +292,7 @@ const ManageUsers = () => {
           <TableRow></TableRow>
         </TableBody>
       </Table>
+      </div>
       {
         totalPages>=1 && <div className="flex justify-center items-center gap-2 pb-4 py-4">
         <div>
@@ -309,6 +313,11 @@ const ManageUsers = () => {
                   setParams(queryParam);
                   setCurrentPage(item);
                 }}
+                className={`${
+                  currentPage === item
+                    ? "bg-[#1B4D3E] text-white"
+                    : "text-primary"
+                }`}
               >
                 {item}
               </Button>

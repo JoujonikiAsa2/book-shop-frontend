@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -29,15 +28,17 @@ const PaymentsDetails = () => {
     );
   }
   return (
-    <div className="w-max-7xl  m-10 jost-thin">
-      <Table className="lg:w-[1000px] max-w-7xl mx-auto border rounded-lg">
+    <div className="w-fit lg:w-[80rem] m-10 poppins-regular">
+          <div className="w-full h-[65vh] ">
+      <Table className="w-full border rounded-lg bg-[#F3F3F3]">
         <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
+        <TableHeader className="bg-[#1B4D3E]">
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead className="w-[100px] text-white">Invoice</TableHead>
+            <TableHead className="text-white">Status</TableHead>
+            <TableHead className="text-white">Method</TableHead>
+            <TableHead className="text-right text-white">Amount</TableHead>
+            <TableHead className="text-right text-white">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -69,6 +70,7 @@ const PaymentsDetails = () => {
           <TableRow></TableRow>
         </TableBody>
       </Table>
+      </div>
     </div>
   );
 };

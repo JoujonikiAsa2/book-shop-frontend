@@ -5,7 +5,7 @@ import SubTitle from "@/components/shared/SubTitle";
 import CustomBanner from "@/components/shared/CustomBanner";
 const About = () => {
   return (
-    <div>
+    <div className="-z-0">
       <div className=" w-full ">
         <div className="pb-12 relative">
             <CustomBanner
@@ -15,10 +15,10 @@ const About = () => {
             bounds"
             />
         </div>
-        <div className="p-6 right-0 bottom-0 pt-12 flex justify-center ">
+        <div className="p-6 right-0 bottom-0 pt-12 flex justify-center text-white">
           <section className="py-8 px-4 w-full max-w-7xl flex flex-col gap-10 relative">
             <div className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 lg:gap-20">
-              <div className="lg:w-[40%] bg-white border p-12 lg:p-20">
+              <div className="lg:w-[40%] bg-[#497D74] border p-12 lg:p-20 float-right-animation">
                 <SubTitle title="Our Mission" description=""></SubTitle>
                 <p className="mb-6">
                   Our mission is to foster a love of reading and create a space
@@ -27,11 +27,11 @@ const About = () => {
                   to our lives.
                 </p>
               </div>
-              <img src={goal} alt="" className="size-72 rounded-full border" />
+              <img src={goal} alt="" className="size-72 rounded-full border shake-animation" />
             </div>
             <div className="flex flex-col lg:flex-row justify-center items-center gap-10 lg:gap-20">
-            <img src={question} alt="" className="size-72 border rounded-full" />
-              <div className="lg:w-[40%] bg-white border p-12 lg:p-20">
+            <img src={question} alt="" className="size-72 border rounded-full shake-animation" />
+              <div className="lg:w-[40%] bg-[#497D74] border p-12 lg:p-20 float-left-animation">
                 <SubTitle title="Why Choose Us" description=""></SubTitle>
                 <ul className="list-disc list-inside space-y-2 mb-6">
                   <li>
@@ -51,7 +51,7 @@ const About = () => {
                 </ul>
               </div>
             </div>
-            <div className=" max-w-[55rem] mx-auto border p-12 lg:p-20">
+            <div className="bg-[#497D74] max-w-[55rem] mx-auto border p-12 lg:p-20 float-right-animation">
               <SubTitle title="More Than a Bookshop" description=""></SubTitle>
               <p>
                 We’re not just a store; we’re a haven for book lovers, a retreat

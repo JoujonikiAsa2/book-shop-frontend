@@ -1,7 +1,7 @@
 ## 1-Book Shop API
-This is a book shop application for managing a bookshop and is built with React JS, TupeScript, Node.js, Express.js, Mongoose and MongoDB. It enables book management, order placement, and revenue tracking. It also includes some exciting features, such as search and filtering. It also allows searching by category.
+This is a book shop application for managing a book shop and is built with React JS, TypeScript, Node.js, Express.js, Mongoose and MongoDB. It enables book management, order placement, and revenue tracking. It also includes some exciting features, such as search and filtering. It also allows searching by category.
 
-[Live Link](https://book-shop-joujonikiasa2s-projects.vercel.app/)
+[Live Link](https://book-shop-frontend-three.vercel.app/)
 [Backend Link](https://github.com/JoujonikiAsa2/Book-Shop/)
 
 
